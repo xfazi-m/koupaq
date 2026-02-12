@@ -621,27 +621,6 @@
         </div>
     </div>
     <div id="toast">Skopiowano do schowka!</div>
- <script>
-        (function() {
-            const btn = document.getElementById('backToTop');
-            const SHOW_SCROLL_HEIGHT = 300;
-            function handleScroll() {
-                if (window.scrollY > SHOW_SCROLL_HEIGHT) {
-                    btn.classList.add('visible');
-                } else {
-                    btn.classList.remove('visible');
-                }
-            }
-            function scrollToTop() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth' 
-                });
-            }
-            window.addEventListener('scroll', handleScroll);
-            btn.addEventListener('click', scrollToTop);
-        })();
-    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
