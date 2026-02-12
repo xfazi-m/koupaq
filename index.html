@@ -175,6 +175,88 @@
             bottom: 50px;
         }
     </style>
+ <style>
+        .btt-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999; 
+            width: 50px;
+            height: 50px;
+            border-radius: 50%; 
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            background: rgba(5, 5, 5, 0.85); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); 
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            outline: none;
+            padding: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(40px) scale(0.8); 
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); 
+        }
+        .btt-button.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        .btt-button:hover {
+            background: rgba(0, 0, 0, 0.95); 
+            transform: translateY(-6px); 
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); 
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        .btt-button:active {
+            transform: translateY(-2px) scale(0.95); 
+        }
+        .btt-icon {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform 0.3s ease; 
+        }
+        .btt-button:hover .btt-icon {
+            transform: translateY(-3px);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .content-placeholder {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        h1 { margin-bottom: 20px; }
+        p { margin-bottom: 20px; color: #555; }
+        .spacer {
+            height: 2000px; 
+            background: linear-gradient(to bottom, #fff, #eee);
+            margin-top: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+    </style>
 </head>
 
 <body class="antialiased relative selection:bg-indigo-100 selection:text-indigo-700">
@@ -246,7 +328,12 @@
             </div>
         </div>
     </section>
-
+<button id="backToTop" class="btt-button" aria-label="Wróć na górę">
+        <svg class="btt-icon" viewBox="0 0 24 24">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
     <section id="o-mnie" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -617,6 +704,27 @@
         </div>
     </div>
     <div id="toast">Skopiowano do schowka!</div>
+ <script>
+        (function() {
+            const btn = document.getElementById('backToTop');
+            const SHOW_SCROLL_HEIGHT = 300;
+            function handleScroll() {
+                if (window.scrollY > SHOW_SCROLL_HEIGHT) {
+                    btn.classList.add('visible');
+                } else {
+                    btn.classList.remove('visible');
+                }
+            }
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth' 
+                });
+            }
+            window.addEventListener('scroll', handleScroll);
+            btn.addEventListener('click', scrollToTop);
+        })();
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
