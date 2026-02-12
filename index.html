@@ -189,102 +189,103 @@
         #goTop:hover { transform: translateY(-5px); background: #000; }
         body { height: 3000px; background: #f0f0f0; } 
     </style>
-     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
+<style>
+        .sekcja-opinii {
             font-family: 'Inter', sans-serif;
-            background-color: #F8FAFC; 
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            overflow-x: hidden;
+            background-color: transparent;
             padding: 40px 0;
+            width: 100%;
+            overflow: hidden; 
+            box-sizing: border-box;
         }
 
-        .header-section {
-            text-align: center;
-            margin-bottom: 50px;
+        .sekcja-opinii * {
+            box-sizing: border-box;
         }
-        
-        h1 { 
-            font-size: 32px; 
-            color: #0F172A; 
+
+        .sekcja-opinii .naglowek {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .sekcja-opinii h2 {
+            font-size: 32px;
+            color: #0F172A;
             font-weight: 800;
+            margin: 0;
             letter-spacing: -0.02em;
         }
-        .marquee-container {
+
+        .op-marquee-container {
             width: 100%;
-            overflow: hidden;
             position: relative;
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            padding: 40px 0; 
         }
 
-        .marquee-track {
+        .op-track {
             display: flex;
             width: max-content;
             gap: 24px;
-            animation: scroll 45s linear infinite;
+            animation: op-scroll 45s linear infinite;
+            padding: 10px 0; 
         }
 
-        .marquee-track:hover {
+        .op-track:hover {
             animation-play-state: paused;
         }
 
-        @keyframes scroll {
+        @keyframes op-scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(calc(-50% - 12px)); } 
         }
-        .review-card {
+
+        .op-card {
             background: #FFFFFF;
-            width: 340px;
-            padding: 32px;
-            border-radius: 24px; 
+            width: 320px;
+            padding: 28px;
+            border-radius: 24px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            border: 1px solid #F1F5F9; 
+            border: 1px solid #F1F5F9;
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            height: 260px; 
+            height: 250px; 
             transition: transform 0.3s ease;
         }
 
-        .review-card:hover {
+        .op-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
-        .stars {
+        .op-stars {
             color: #FBBF24;
             font-size: 18px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             letter-spacing: 2px;
         }
 
-        .review-text {
-            color: #334155; 
+        .op-text {
+            color: #334155;
             font-size: 15px;
             font-style: italic;
-            line-height: 1.6;
+            line-height: 1.5;
             font-weight: 500;
-            flex-grow: 1; 
+            flex-grow: 1;
+            margin: 0 0 16px 0;
         }
 
-        .user-profile {
+        .op-profile {
             display: flex;
             align-items: center;
-            gap: 14px;
-            margin-top: 20px; 
+            gap: 12px;
         }
 
-        .avatar {
-            width: 44px;
-            height: 44px;
-            background-color: #F1F5F9; 
+        .op-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #F1F5F9;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -292,19 +293,17 @@
             flex-shrink: 0;
         }
 
-
-        .avatar svg {
-            width: 24px;
-            height: 24px;
-            fill: #1E293B; 
+        .op-avatar svg {
+            width: 20px;
+            height: 20px;
+            fill: #1E293B;
         }
 
-        .username {
+        .op-username {
             font-weight: 700;
             color: #0F172A;
             font-size: 15px;
         }
-
     </style>
 </head>
 <button id="backToTop" class="btt-button" aria-label="Wróć na górę">
@@ -567,93 +566,106 @@
         </div>
     </section>
  
-    <div class="header-section">
-        <h1>Co mówią klienci?</h1>
-    </div>
+ <div class="sekcja-opinii">
+        <div class="naglowek">
+            <h2>Co mówią klienci?</h2>
+        </div>
 
-    <div class="marquee-container">
-        <div class="marquee-track">
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"Zajebiste grafiki administracja dowalona"</p>
-                <div class="user-profile">
-                    <div class="avatar">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                        </svg>
+        <div class="op-marquee-container">
+            <div class="op-track">
+                
+                <!-- === ZESTAW 1 (Oryginał) === -->
+                
+                <div class="op-card">
+                    <div class="op-stars">★★★★★</div>
+                    <p class="op-text">"Zajebiste grafiki administracja dowalona"</p>
+                    <div class="op-profile">
+                        <div class="op-avatar">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <span class="op-username">nawalony</span>
                     </div>
-                    <span class="username">nawalony</span>
                 </div>
-            </div>
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"Koupaczek jak zawsze dowiózł, nic dodać nic ująć, jakość i profesjonalizm jak zawsze"</p>
-                <div class="user-profile">
-                    <div class="avatar">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+
+                <div class="op-card">
+                    <div class="op-stars">★★★★★</div>
+                    <p class="op-text">"Koupaczek jak zawsze dowiózł, nic dodać nic ująć, jakość i profesjonalizm jak zawsze"</p>
+                    <div class="op-profile">
+                        <div class="op-avatar">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <span class="op-username">79MP</span>
                     </div>
-                    <span class="username">79MP</span>
                 </div>
-            </div>
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"dobra jakosc praca zrobiona szybko polecam"</p>
-                <div class="user-profile">
-                    <div class="avatar">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+
+                <div class="op-card">
+                    <div class="op-stars">★★★★★</div>
+                    <p class="op-text">"dobra jakosc praca zrobiona szybko polecam"</p>
+                    <div class="op-profile">
+                        <div class="op-avatar">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <span class="op-username">Eck0!</span>
                     </div>
-                    <span class="username">Eck0!</span>
                 </div>
-            </div>
-             <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"Szybkie wykonanie, bezproblemowa poprawa elementów, polecam!"</p>
-                <div class="user-profile">
-                    <div class="avatar">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+
+                 <div class="op-card">
+                    <div class="op-stars">★★★★★</div>
+                    <p class="op-text">"Szybkie wykonanie, bezproblemowa poprawa elementów, polecam!"</p>
+                    <div class="op-profile">
+                        <div class="op-avatar">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <span class="op-username">Kaczmar</span>
                     </div>
-                    <span class="username">Kaczmar</span>
                 </div>
-            </div>
-             <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"Zajebiste grafiki administracja dowalona"</p>
-                <div class="user-profile">
-                    <div class="avatar">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+
+                <!-- === ZESTAW 2 (Kopia dla pętli) === -->
+                
+                <div class="op-card">
+                    <div class="op-stars">★★★★★</div>
+                    <p class="op-text">"Zajebiste grafiki administracja dowalona"</p>
+                    <div class="op-profile">
+                        <div class="op-avatar">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <span class="op-username">nawalony</span>
                     </div>
-                    <span class="username">nawalony</span>
                 </div>
-            </div>
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"Koupaczek jak zawsze dowiózł, nic dodać nic ująć, jakość i profesjonalizm jak zawsze"</p>
-                <div class="user-profile">
-                    <div class="avatar">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+
+                <div class="op-card">
+                    <div class="op-stars">★★★★★</div>
+                    <p class="op-text">"Koupaczek jak zawsze dowiózł, nic dodać nic ująć, jakość i profesjonalizm jak zawsze"</p>
+                    <div class="op-profile">
+                        <div class="op-avatar">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <span class="op-username">79MP</span>
                     </div>
-                    <span class="username">79MP</span>
                 </div>
-            </div>
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"dobra jakosc praca zrobiona szybko polecam"</p>
-                <div class="user-profile">
-                    <div class="avatar">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+
+                <div class="op-card">
+                    <div class="op-stars">★★★★★</div>
+                    <p class="op-text">"dobra jakosc praca zrobiona szybko polecam"</p>
+                    <div class="op-profile">
+                        <div class="op-avatar">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <span class="op-username">Eck0!</span>
                     </div>
-                    <span class="username">Eck0!</span>
                 </div>
-            </div>
-             <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"Szybkie wykonanie, bezproblemowa poprawa elementów, polecam!"</p>
-                <div class="user-profile">
-                    <div class="avatar">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+
+                 <div class="op-card">
+                    <div class="op-stars">★★★★★</div>
+                    <p class="op-text">"Szybkie wykonanie, bezproblemowa poprawa elementów, polecam!"</p>
+                    <div class="op-profile">
+                        <div class="op-avatar">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <span class="op-username">Kaczmar</span>
                     </div>
-                    <span class="username">Kaczmar</span>
                 </div>
+
             </div>
         </div>
     </div>
