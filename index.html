@@ -175,6 +175,58 @@
             bottom: 50px;
         }
     </style>
+     <style>
+        /* -------------------------------------------------------
+           DO NOT COPY / NIE KOPIOWAĆ
+           Właściciel: X_FAZI
+           Kontakt: kontakt@xfazi.pl
+        -------------------------------------------------------
+        */
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #1a1a1a;
+            color: #00ff00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            text-align: center;
+            
+            /* --- SYSTEM OCHRONNY X_FAZI --- */
+            /* Blokada zaznaczania tekstu */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none;    /* Firefox */
+            -ms-user-select: none;     /* IE10+/Edge */
+            user-select: none;         /* Standard */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px #00ff00;
+            cursor: not-allowed; /* Kursor pokazuje zakaz */
+        }
+
+        p {
+            max-width: 600px;
+            color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .container {
+            border: 1px solid #333;
+            padding: 2rem;
+            background: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+            /* Blokada klikania myszką dla elementów wewnątrz, jeśli trzeba */
+        }
+
+        /* Styl dla komunikatu o blokadzie (jeśli byśmy chcieli dymek) */
+        .alert-box {
+            display: none; /* Ukryte domyślnie */
+        }
+    </style>
 </head>
 
 <body class="antialiased relative selection:bg-indigo-100 selection:text-indigo-700">
@@ -617,6 +669,91 @@
         </div>
     </div>
     <div id="toast">Skopiowano do schowka!</div>
+ <script>
+        // --- SYSTEM OCHRONNY X_FAZI V2.0 ---
+        
+        // 1. Blokada prawego przycisku myszy (dodatkowe zabezpieczenie)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            // Opcjonalnie: alert('Prawa autorskie: X_FAZI. Kopiowanie zabronione.');
+        });
+
+        // 2. Blokada klawiszy (F12, Ctrl+U, Ctrl+C, Ctrl+S itp.)
+        document.onkeydown = function(e) {
+            // Blokada F12
+            if(e.keyCode == 123) {
+                console.warn("X_FAZI: Próba otwarcia narzędzi deweloperskich zablokowana.");
+                return false;
+            }
+            
+            // Blokada kombinacji Ctrl+...
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { // Ctrl+Shift+I
+                console.warn("X_FAZI: Inspekcja zablokowana.");
+                return false;
+            }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { // Ctrl+Shift+C
+                return false;
+            }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { // Ctrl+Shift+J
+                return false;
+            }
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { // Ctrl+U (Źródło)
+                console.warn("X_FAZI: Podgląd źródła zablokowany.");
+                return false;
+            }
+            if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) { // Ctrl+S (Zapisz)
+                return false;
+            }
+            if(e.ctrlKey && e.keyCode == 'C'.charCodeAt(0)) { // Ctrl+C (Kopiuj)
+                alert('© Prawa autorskie: X_FAZI. Kopiowanie treści jest zabronione!');
+                return false;
+            }
+        }
+
+        // 3. Blokada przeciągania elementów (obrazków, tekstu)
+        document.ondragstart = function() { return false; };
+
+
+        // --- SEKCJA KONSOLI (Dla tych co jednak obejdą blokady) ---
+        (function() {
+            const titleStyle = [
+                'font-size: 60px',
+                'font-weight: bold',
+                'color: #000',
+                'text-shadow: 2px 2px 0px #00ff00, 4px 4px 0px #ff00de',
+                'font-family: monospace'
+            ].join(';');
+
+            const warningStyle = [
+                'font-size: 18px',
+                'color: #ff3333',
+                'font-weight: bold',
+                'font-family: sans-serif'
+            ].join(';');
+
+            const legalStyle = [
+                'font-size: 14px',
+                'color: #aaaaaa',
+                'font-family: sans-serif'
+            ].join(';');
+
+            const contactStyle = [
+                'font-size: 16px',
+                'color: #00ff00',
+                'font-weight: bold',
+                'background: #222',
+                'padding: 5px',
+                'border-radius: 5px'
+            ].join(';');
+
+            // Wyświetlanie dużego logo w konsoli
+            console.log('%c X_FAZI ', titleStyle);
+            console.log('%c🛑 SYSTEM BEZPIECZEŃSTWA AKTYWNY', warningStyle);
+            console.log('%cTen kod jest monitorowany. Próba kopiowania została odnotowana.', legalStyle);
+            console.log('%c📬 Kontakt z deweloperem / Contact:', legalStyle);
+            console.log('%cWWW: xfazi.pl | EMAIL: kontakt@xfazi.pl', contactStyle);
+        })();
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
