@@ -225,7 +225,26 @@
         height: auto;
     }
 </style>
+     <style>
+        #goTop {
+            position: fixed; bottom: 25px; right: 25px; z-index: 2147483647;
+            width: 45px; height: 45px; border-radius: 50%;
+            background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px); color: #fff; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        #goTop.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        #goTop:hover { transform: translateY(-5px); background: #000; }
+        body { height: 3000px; background: #f0f0f0; } 
+    </style>
 </head>
+ <div id="goTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </div>
 <body class="antialiased relative selection:bg-indigo-100 selection:text-indigo-700">
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
         <div class="absolute top-[-10%] left-[-10%] w-[40rem] h-[40rem] bg-purple-100 rounded-full mix-blend-multiply filter blur-[100px] opacity-50 animate-blob"></div>
@@ -557,6 +576,11 @@
         </div>
     </div>
     <div id="toast">Skopiowano do schowka!</div>
+      <script>
+        window.addEventListener('scroll', () => 
+            document.getElementById('goTop').classList.toggle('show', window.scrollY > 300)
+        );
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
