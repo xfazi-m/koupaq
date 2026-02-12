@@ -189,14 +189,15 @@
         #goTop:hover { transform: translateY(-5px); background: #000; }
         body { height: 3000px; background: #f0f0f0; } 
     </style>
-<style>
+    <style>
         .sekcja-opinii {
             font-family: 'Inter', sans-serif;
-            background-color: transparent;
-            padding: 40px 0;
+            background-color: #FFFFFF; 
+            padding: 60px 0; 
             width: 100%;
             overflow: hidden; 
             box-sizing: border-box;
+            position: relative; 
         }
 
         .sekcja-opinii * {
@@ -205,7 +206,7 @@
 
         .sekcja-opinii .naglowek {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .sekcja-opinii h2 {
@@ -213,14 +214,14 @@
             color: #0F172A;
             font-weight: 800;
             margin: 0;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
         }
 
         .op-marquee-container {
             width: 100%;
             position: relative;
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
         }
 
         .op-track {
@@ -228,7 +229,7 @@
             width: max-content;
             gap: 24px;
             animation: op-scroll 45s linear infinite;
-            padding: 10px 0; 
+            padding: 20px 0; 
         }
 
         .op-track:hover {
@@ -237,72 +238,75 @@
 
         @keyframes op-scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-50% - 12px)); } 
+            100% { transform: translateX(calc(-50% - 12px)); }
         }
 
         .op-card {
             background: #FFFFFF;
-            width: 320px;
-            padding: 28px;
+            width: 340px;
+            padding: 32px;
             border-radius: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            border: 1px solid #F1F5F9;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            border: 1px solid #F3F4F6; 
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
-            height: 250px; 
-            transition: transform 0.3s ease;
+            justify-content: space-between;
+            height: 280px; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .op-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
         .op-stars {
-            color: #FBBF24;
-            font-size: 18px;
-            margin-bottom: 16px;
+            color: #FACC15;
+            font-size: 20px;
+            margin-bottom: 20px;
             letter-spacing: 2px;
         }
 
         .op-text {
-            color: #334155;
-            font-size: 15px;
+            color: #374151; 
+            font-size: 16px;
             font-style: italic;
-            line-height: 1.5;
+            line-height: 1.6;
             font-weight: 500;
             flex-grow: 1;
-            margin: 0 0 16px 0;
+            margin: 0 0 24px 0;
         }
 
         .op-profile {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .op-avatar {
-            width: 40px;
-            height: 40px;
-            background-color: #F1F5F9;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            border: 2px solid #111827; 
+            background: transparent;
         }
 
         .op-avatar svg {
-            width: 20px;
-            height: 20px;
-            fill: #1E293B;
+            width: 28px;
+            height: 28px;
+            fill: #111827; 
         }
 
         .op-username {
             font-weight: 700;
-            color: #0F172A;
-            font-size: 15px;
+            color: #111827;
+            font-size: 16px;
+            letter-spacing: -0.01em;
         }
     </style>
 </head>
