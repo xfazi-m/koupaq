@@ -157,7 +157,7 @@
 <style>
     #pf-component-root {
         font-family: 'Inter', sans-serif;
-        color: #0f172a; /* Slate-900 */
+        color: #0f172a; 
         box-sizing: border-box;
     }
 
@@ -242,10 +242,7 @@
         </div>
     </nav>
 <div id="pf-component-root" class="w-full flex flex-col items-center pt-[150px] pb-12 px-4 sm:px-6 relative">
-
     <div class="w-full max-w-6xl">
-
-        <!-- WYSZUKIWARKA -->
         <div class="flex justify-center mb-16 pf-animate-enter">
             <div class="relative w-full max-w-md">
                 <i class="ph ph-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl"></i>
@@ -258,57 +255,38 @@
                 >
             </div>
         </div>
-
-        <!-- GRID PROJEKTÓW -->
         <div id="pf-projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
-            <!-- Karty -->
         </div>
-
-        <!-- Stan pusty -->
         <div id="pf-emptyState" class="hidden flex-col items-center justify-center py-20 opacity-0 transition-opacity duration-300">
             <span class="text-gray-400 text-sm">Brak wyników wyszukiwania</span>
         </div>
-
     </div>
-
-    <!-- MODAL -->
-    <!-- Bardzo wysoki z-index (99999), żeby przykrył menu -->
     <div id="pf-projectModal" class="fixed inset-0 z-[99999] hidden" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity opacity-0 duration-300" id="pf-modalBackdrop"></div>
-
         <div class="fixed inset-0 z-[100000] overflow-y-auto pf-no-scrollbar">
             <div class="flex min-h-full items-center justify-center p-4">
                 <div class="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all text-left" id="pf-modalPanel">
-                    
                     <button onclick="pf_closeModal()" class="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center bg-white/80 hover:bg-white backdrop-blur text-gray-800 rounded-full transition-all shadow-sm cursor-pointer border-0">
                         <i class="ph ph-x text-sm font-bold"></i>
                     </button>
-
                     <div class="w-full aspect-video bg-gray-100">
                         <img id="pf-modalImage" src="" alt="Podgląd" class="w-full h-full object-cover">
                     </div>
-
                     <div class="p-8">
                         <h2 class="text-2xl font-bold text-gray-900 mb-2 mt-0 leading-tight" id="pf-modalTitle">
                             Tytuł Projektu
                         </h2>
-                        
                         <p class="text-gray-500 text-base leading-relaxed mb-6 mt-0" id="pf-modalDescription">
                             Opis...
                         </p>
-
                         <div class="flex flex-wrap gap-2" id="pf-modalTags">
-                            <!-- Tagi -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
-
-<!-- 4. LOGIKA (JS) -->
 <script>
     const pf_projectsData = [
         {
@@ -403,7 +381,6 @@
             tags: ["Cinema 4D", "Photoshop"]
         }
     ];
-
     const pf_grid = document.getElementById('pf-projectsGrid');
     const pf_searchInput = document.getElementById('pf-searchInput');
     const pf_emptyState = document.getElementById('pf-emptyState');
@@ -414,7 +391,6 @@
     const pf_modalImage = document.getElementById('pf-modalImage');
     const pf_modalDesc = document.getElementById('pf-modalDescription');
     const pf_modalTags = document.getElementById('pf-modalTags');
-
     function pf_createCard(project, index) {
         const delay = index * 50;
         return `
@@ -442,7 +418,6 @@
             </div>
         `;
     }
-
     function pf_renderProjects(data) {
         if(!pf_grid) return;
         pf_grid.innerHTML = '';
