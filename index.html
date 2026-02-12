@@ -189,6 +189,123 @@
         #goTop:hover { transform: translateY(-5px); background: #000; }
         body { height: 3000px; background: #f0f0f0; } 
     </style>
+     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 40px 0;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        h1 { 
+            font-size: 32px; 
+            color: #0F172A; 
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            padding: 40px 0; 
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            gap: 24px;
+            animation: scroll 45s linear infinite;
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 12px)); } 
+        }
+        .review-card {
+            background: #FFFFFF;
+            width: 340px;
+            padding: 32px;
+            border-radius: 24px; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #F1F5F9; 
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 260px; 
+            transition: transform 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .stars {
+            color: #FBBF24;
+            font-size: 18px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            color: #334155; 
+            font-size: 15px;
+            font-style: italic;
+            line-height: 1.6;
+            font-weight: 500;
+            flex-grow: 1; 
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: 20px; 
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            background-color: #F1F5F9; 
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+
+        .avatar svg {
+            width: 24px;
+            height: 24px;
+            fill: #1E293B; 
+        }
+
+        .username {
+            font-weight: 700;
+            color: #0F172A;
+            font-size: 15px;
+        }
+
+    </style>
 </head>
 <button id="backToTop" class="btt-button" aria-label="Wróć na górę">
         <svg class="btt-icon" viewBox="0 0 24 24">
