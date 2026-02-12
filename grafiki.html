@@ -150,6 +150,41 @@
             bottom: 50px;
         }
     </style>
+    <style>
+    /* Ukrywanie paska przewijania tylko wewnątrz tego komponentu */
+    .portfolio-wrapper .no-scrollbar::-webkit-scrollbar { display: none; }
+    .portfolio-wrapper .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Animacje */
+    @keyframes portfolioFadeUp {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .portfolio-wrapper .animate-enter {
+        animation: portfolioFadeUp 0.5s ease-out forwards;
+        opacity: 0;
+    }
+
+    .portfolio-wrapper .search-input:focus {
+        box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
+    }
+
+    @keyframes portfolioModalPop {
+        0% { opacity: 0; transform: scale(0.96); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+    .portfolio-wrapper .modal-animate-in {
+        animation: portfolioModalPop 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    
+    .portfolio-wrapper .tag-pill {
+        background-color: #f3f4f6;
+        transition: background-color 0.2s;
+    }
+    .portfolio-wrapper .tag-pill:hover {
+        background-color: #e5e7eb;
+    }
+</style>
 </head>
 <body class="antialiased relative selection:bg-indigo-100 selection:text-indigo-700">
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
@@ -191,246 +226,278 @@
             </div>
         </div>
     </nav>
-    <section id="grafiki" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Grafiki</h2>
-                <p class="text-slate-600 text-lg"></p>
+<div class="portfolio-wrapper text-slate-900 antialiased w-full flex flex-col items-center py-12 px-4 sm:px-6 relative">
+
+    <div class="w-full max-w-6xl">
+
+        <!-- WYSZUKIWARKA -->
+        <div class="flex justify-center mb-16 animate-enter">
+            <div class="relative w-full max-w-md">
+                <i class="ph ph-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl"></i>
+                <input 
+                    type="text" 
+                    id="pf-searchInput" 
+                    placeholder="Szukaj (np. Miniaturka, Embed)..." 
+                    class="search-input w-full bg-gray-50 border border-gray-200 text-gray-800 text-sm font-medium rounded-full py-3.5 pl-12 pr-4 outline-none transition-all placeholder-gray-400 hover:bg-gray-100 focus:bg-white focus:border-gray-300"
+                    autocomplete="off"
+                >
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="portfolio-grid">
-                <div class="reveal-on-scroll project-card cursor-pointer group" 
-                     onclick="openModal(this)"
-                     data-title="Miniaturka"
-                     data-category=""
-                     data-image="https://i.imgur.com/DCvqIER.jpeg"
-                     data-description="Miniaturka w stylu minecraft">
-                    <div class="project-thumb relative overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] border border-slate-100">
-                        <img src="https://i.imgur.com/DCvqIER.jpeg" alt="Project 1" class="w-full h-full object-cover">
+        </div>
+
+        <!-- GRID PROJEKTÓW -->
+        <div id="pf-projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+            <!-- Karty generowane automatycznie -->
+        </div>
+
+        <!-- Stan pusty -->
+        <div id="pf-emptyState" class="hidden flex-col items-center justify-center py-20 opacity-0 transition-opacity duration-300">
+            <span class="text-gray-400 text-sm">Brak wyników wyszukiwania</span>
+        </div>
+
+    </div>
+
+    <!-- MODAL (OKNO) -->
+    <!-- Z-index ustawiony wysoko, żeby przykrył menu Twojej strony -->
+    <div id="pf-projectModal" class="fixed inset-0 z-[9999] hidden" role="dialog" aria-modal="true" style="z-index: 9999;">
+        <div class="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity opacity-0 duration-300" id="pf-modalBackdrop"></div>
+
+        <div class="fixed inset-0 z-[10000] overflow-y-auto no-scrollbar">
+            <div class="flex min-h-full items-center justify-center p-4">
+                <div class="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all" id="pf-modalPanel">
+                    
+                    <button onclick="pf_closeModal()" class="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center bg-white/80 hover:bg-white backdrop-blur text-gray-800 rounded-full transition-all shadow-sm">
+                        <i class="ph ph-x text-sm font-bold"></i>
+                    </button>
+
+                    <div class="w-full aspect-video bg-gray-100">
+                        <img id="pf-modalImage" src="" alt="Podgląd" class="w-full h-full object-cover">
                     </div>
-                    <div class="mt-5 px-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Miniaturka</h3>
-                            <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
+
+                    <div class="p-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-2" id="pf-modalTitle">
+                            Tytuł Projektu
+                        </h2>
+                        
+                        <p class="text-gray-500 text-base leading-relaxed mb-6" id="pf-modalDescription">
+                            Opis...
+                        </p>
+
+                        <div class="flex flex-wrap gap-2" id="pf-modalTags">
+                            <!-- Tagi -->
                         </div>
-                        <p class="text-sm text-slate-500 mt-1"></p>
-                    </div>
-                </div>
-                <div class="reveal-on-scroll stagger-delay-1 project-card cursor-pointer group" 
-                     onclick="openModal(this)"
-                     data-title="Miniaturka"
-                     data-category=""
-                     data-image="https://i.imgur.com/KKwzVRx.jpeg"
-                     data-description="Miniaturka w stylu minecraft">
-                    <div class="project-thumb relative overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] border border-slate-100">
-                        <img src="https://i.imgur.com/KKwzVRx.jpeg" alt="Project 2" class="w-full h-full object-cover">
-                    </div>
-                    <div class="mt-5 px-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Miniaturka</h3>
-                            <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </div>
-                        <p class="text-sm text-slate-500 mt-1"></p>
-                    </div>
-                </div>
-                <div class="reveal-on-scroll stagger-delay-2 project-card cursor-pointer group" 
-                     onclick="openModal(this)"
-                     data-title="Miniaturka"
-                     data-category=""
-                     data-image="https://i.imgur.com/vhUuzwQ.png"
-                     data-description="Miniaturka w stylu minecraft">
-                    <div class="project-thumb relative overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] border border-slate-100">
-                        <img src="https://i.imgur.com/vhUuzwQ.png" alt="Project 3" class="w-full h-full object-cover">
-                    </div>
-                    <div class="mt-5 px-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Miniaturka</h3>
-                            <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </div>
-                        <p class="text-sm text-slate-500 mt-1"></p>
-                    </div>
-                </div>
-                 <div class="reveal-on-scroll project-card cursor-pointer group" 
-                      onclick="openModal(this)"
-                      data-title="Miniaturka"
-                      data-category=""
-                      data-image="https://i.imgur.com/DBqIpww.jpeg"
-                      data-description="Miniaturka w stylu minecraft">
-                    <div class="project-thumb relative overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] border border-slate-100">
-                        <img src="https://i.imgur.com/DBqIpww.jpeg" alt="Project 4" class="w-full h-full object-cover">
-                    </div>
-                    <div class="mt-5 px-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Miniaturka</h3>
-                            <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </div>
-                        <p class="text-sm text-slate-500 mt-1"></p>
-                    </div>
-                </div>
-                <div class="reveal-on-scroll stagger-delay-1 project-card cursor-pointer group" 
-                     onclick="openModal(this)"
-                     data-title="Miniaturka"
-                     data-category=""
-                     data-image="https://i.imgur.com/UG9TgDK.jpeg"
-                     data-description="Miniaturka w stylu minecraft">
-                    <div class="project-thumb relative overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] border border-slate-100">
-                        <img src="https://i.imgur.com/UG9TgDK.jpeg" alt="Project 5" class="w-full h-full object-cover">
-                    </div>
-                    <div class="mt-5 px-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Miniaturka</h3>
-                            <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </div>
-                        <p class="text-sm text-slate-500 mt-1"></p>
-                    </div>
-                </div>
-                <div class="reveal-on-scroll stagger-delay-2 project-card cursor-pointer group" 
-                     onclick="openModal(this)"
-                     data-title="Miniaturka"
-                     data-category=""
-                     data-image="https://i.imgur.com/wx1fe2u.jpeg"
-                     data-description="Miniaturka w stylu minecraft">
-                    <div class="project-thumb relative overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] border border-slate-100">
-                        <img src="https://i.imgur.com/wx1fe2u.jpeg" alt="Project 6" class="w-full h-full object-cover">
-                    </div>
-                    <div class="mt-5 px-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Miniaturka</h3>
-                            <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </div>
-                        <p class="text-sm text-slate-500 mt-1"></p>
                     </div>
                 </div>
             </div>
-                <section id="grafiki" class="py-24 bg-white">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="portfolio-grid">
-                <div class="reveal-on-scroll project-card cursor-pointer group" 
-                     onclick="openModal(this)"
-                     data-title="Miniaturka"
-                     data-category=""
-                     data-image="https://i.imgur.com/oXDsc5c.jpeg"
-                     data-description="Miniaturka w stylu minecraft">
-                    <div class="project-thumb relative overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] border border-slate-100">
-                        <img src="https://i.imgur.com/oXDsc5c.jpeg" alt="Project 1" class="w-full h-full object-cover">
-                    </div>
-                    <div class="mt-5 px-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Miniaturka</h3>
-                            <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </div>
-                        <p class="text-sm text-slate-500 mt-1"></p>
-                    </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- SEKCJA 3: JAVASCRIPT (LOGIKA) -->
+<script>
+    // DANE (Twoje teksty i linki - niezmienione)
+    const pf_projectsData = [
+        {
+            id: 1,
+            title: "Embed Discord",
+            image: "https://i.imgur.com/gPZMlNu.png", 
+            description: "Profesjonalna paczka embedów na serwer discord",
+            tags: ["Adobe Photoshop", "Cinema 4D"] 
+        },
+        {
+            id: 2,
+            title: "Miniaturka",
+            image: "https://i.imgur.com/ZrL2Hcv.png",
+            description: "Profesjonalna miniaturka minecraft",
+            tags: ["Cinema 4D", "Photoshop"]
+        },
+        {
+            id: 3,
+            title: "Embed Discord",
+            image: "https://i.imgur.com/LgkZcGV.png",
+            description: "Profesjonalna paczka embedów na serwer discord",
+            tags: ["Cinema 4D", "Photoshop"]
+        },
+        {
+            id: 4,
+            title: "Miniaturka",
+            image: "https://i.imgur.com/8iE1trS.png",
+            description: "Profesjonalna miniaturka minecraft",
+            tags: ["Adobe Photoshop", "Cinema 4D"]
+        },
+        {
+            id: 5,
+            title: "Baner",
+            image: "https://i.imgur.com/NBxE8E9.png",
+            description: "Baner na YT",
+            tags: ["Cinema 4D", "Photoshop"]
+        },
+        {
+            id: 6,
+            title: "Miniaturka",
+            image: "https://i.imgur.com/Pu6yjqZ.png",
+            description: "Profesjonalna miniaturka minecraft",
+            tags: ["Cinema 4D", "Photoshop"]
+        },
+        {
+            id: 7,
+            title: "Embed",
+            image: "https://i.imgur.com/16WJGzf.png",
+            description: "Profesjonalna paczka embedów na serwer discord.",
+            tags: ["Cinema 4D", "Photoshop"]
+        },
+        {
+            id: 8,
+            title: "Miniaturka",
+            image: "https://i.imgur.com/enlSyt2.png",
+            description: "Profesjonalna miniaturka minecraft",
+            tags: ["Cinema 4D", "Photoshop"]
+        },
+        {
+            id: 9,
+            title: "Miniaturka",
+            image: "https://i.imgur.com/LBYmaOa.png",
+            description: "Profesjonalna miniaturka minecraft",
+            tags: ["Cinema 4D", "Photoshop"]
+        },
+        {
+            id: 10,
+            title: "Miniaturka",
+            image: "https://i.imgur.com/YwkPrQR.png",
+            description: "Profesjonalna miniaturka minecraft",
+            tags: ["Cinema 4D", "Photoshop"]
+        },
+        {
+            id: 11,
+            title: "Miniaturka",
+            image: "https://i.imgur.com/yAF2uaV.png",
+            description: "Profesjonalna miniaturka minecraft",
+            tags: ["Cinema 4D", "Photoshop"]
+        },
+        {
+            id: 12,
+            title: "Miniaturka",
+            image: "https://i.imgur.com/9NAiHor.png",
+            description: "Profesjonalna miniaturka minecraft",
+            tags: ["Cinema 4D", "Photoshop"]
+        },
+        {
+            id: 13,
+            title: "Miniaturka",
+            image: "https://i.imgur.com/v3yCo8G.png",
+            description: "Profesjonalna miniaturka minecraft",
+            tags: ["Cinema 4D", "Photoshop"]
+        }
+    ];
+
+    // Elementy DOM (Dodałem prefix 'pf-', żeby nie gryzły się z Twoją stroną)
+    const pf_grid = document.getElementById('pf-projectsGrid');
+    const pf_searchInput = document.getElementById('pf-searchInput');
+    const pf_emptyState = document.getElementById('pf-emptyState');
+    const pf_modal = document.getElementById('pf-projectModal');
+    const pf_modalPanel = document.getElementById('pf-modalPanel');
+    const pf_modalBackdrop = document.getElementById('pf-modalBackdrop');
+    const pf_modalTitle = document.getElementById('pf-modalTitle');
+    const pf_modalImage = document.getElementById('pf-modalImage');
+    const pf_modalDesc = document.getElementById('pf-modalDescription');
+    const pf_modalTags = document.getElementById('pf-modalTags');
+
+    function pf_createCard(project, index) {
+        const delay = index * 50;
+        return `
+            <div 
+                class="group cursor-pointer animate-enter"
+                style="animation-delay: ${delay}ms"
+                onclick="pf_openModal(${project.id})"
+            >
+                <div class="w-full aspect-[16/9] rounded-2xl overflow-hidden mb-3 bg-gray-100 transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1">
+                    <img 
+                        src="${project.image}" 
+                        alt="${project.title}" 
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                    >
                 </div>
-                <div class="reveal-on-scroll stagger-delay-1 project-card cursor-pointer group" 
-                     onclick="openModal(this)"
-                     data-title="Miniaturka"
-                     data-category=""
-                     data-image="https://i.imgur.com/W4PQMGh.jpeg"
-                     data-description="Miniaturka w stylu minecraft">
-                    <div class="project-thumb relative overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] border border-slate-100">
-                        <img src="https://i.imgur.com/W4PQMGh.jpeg" alt="Project 2" class="w-full h-full object-cover">
-                    </div>
-                    <div class="mt-5 px-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Miniaturka</h3>
-                            <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </div>
-                        <p class="text-sm text-slate-500 mt-1"></p>
-                    </div>
-                </div>
-                <div class="reveal-on-scroll stagger-delay-2 project-card cursor-pointer group" 
-                     onclick="openModal(this)"
-                     data-title="Embed"
-                     data-category=""
-                     data-image="https://i.imgur.com/bCbnhpH.jpeg"
-                     data-description="Embed w stylu minecraft">
-                    <div class="project-thumb relative overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] border border-slate-100">
-                        <img src="https://i.imgur.com/bCbnhpH.jpeg" alt="Project 3" class="w-full h-full object-cover">
-                    </div>
-                    <div class="mt-5 px-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Embed</h3>
-                            <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </div>
-                        <p class="text-sm text-slate-500 mt-1"></p>
-                    </div>
-                </div>
-                 <div class="reveal-on-scroll project-card cursor-pointer group" 
-                      onclick="openModal(this)"
-                      data-title="Embed"
-                      data-category=""
-                      data-image="https://i.imgur.com/ee7MKtO.jpeg"
-                      data-description="Embed w stylu minecraft">
-                    <div class="project-thumb relative overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] border border-slate-100">
-                        <img src="https://i.imgur.com/ee7MKtO.jpeg" alt="Project 4" class="w-full h-full object-cover">
-                    </div>
-                    <div class="mt-5 px-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Embed</h3>
-                            <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </div>
-                        <p class="text-sm text-slate-500 mt-1"></p>
-                    </div>
-                </div>
-                <div class="reveal-on-scroll stagger-delay-1 project-card cursor-pointer group" 
-                     onclick="openModal(this)"
-                     data-title="Embed"
-                     data-category=""
-                     data-image="https://i.imgur.com/QuYnE1E.jpeg"
-                     data-description="Embed w stylu minecraft">
-                    <div class="project-thumb relative overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] border border-slate-100">
-                        <img src="https://i.imgur.com/QuYnE1E.jpeg" alt="Project 5" class="w-full h-full object-cover">
-                    </div>
-                    <div class="mt-5 px-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Embed</h3>
-                            <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </div>
-                        <p class="text-sm text-slate-500 mt-1"></p>
-                    </div>
-                </div>
-                <div class="reveal-on-scroll stagger-delay-2 project-card cursor-pointer group" 
-                     onclick="openModal(this)"
-                     data-title="Baner"
-                     data-category=""
-                     data-image="https://i.imgur.com/PyimVyU.png"
-                     data-description="Baner w stylu minecraft">
-                    <div class="project-thumb relative overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] border border-slate-100">
-                        <img src="https://i.imgur.com/PyimVyU.png" alt="Project 6" class="w-full h-full object-cover">
-                    </div>
-                    <div class="mt-5 px-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Baner</h3>
-                            <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </div>
-                        <p class="text-sm text-slate-500 mt-1"></p>
+                <div class="flex items-center justify-between px-1">
+                    <h3 class="text-[17px] font-bold text-gray-900 group-hover:text-black transition-colors">
+                        ${project.title}
+                    </h3>
+                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 transition-all duration-300 group-hover:bg-blue-100 group-hover:text-blue-600">
+                        <i class="ph ph-arrow-right text-sm font-bold transform group-hover:-rotate-45 transition-transform duration-300"></i>
                     </div>
                 </div>
             </div>
-             <div>
+        `;
+    }
+
+    function pf_renderProjects(data) {
+        if(!pf_grid) return; // Zabezpieczenie
+        pf_grid.innerHTML = '';
+        if (data.length === 0) {
+            pf_grid.classList.add('hidden');
+            pf_emptyState.classList.remove('hidden');
+            pf_emptyState.classList.add('flex');
+            setTimeout(() => pf_emptyState.classList.remove('opacity-0'), 10);
+        } else {
+            pf_grid.classList.remove('hidden');
+            pf_emptyState.classList.add('hidden');
+            pf_emptyState.classList.remove('flex');
+            pf_emptyState.classList.add('opacity-0');
+            data.forEach((project, index) => {
+                pf_grid.innerHTML += pf_createCard(project, index);
+            });
+        }
+    }
+
+    if(pf_searchInput) {
+        pf_searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase().trim();
+            const filtered = pf_projectsData.filter(p => p.title.toLowerCase().includes(term));
+            pf_renderProjects(filtered);
+        });
+    }
+
+    // Funkcje globalne (window) żeby działały z onclick w HTML
+    window.pf_openModal = function(id) {
+        const project = pf_projectsData.find(p => p.id === id);
+        if (!project) return;
+        pf_modalTitle.textContent = project.title;
+        pf_modalDesc.textContent = project.description;
+        pf_modalImage.src = project.image;
+        pf_modalTags.innerHTML = project.tags.map(tag => `
+            <span class="tag-pill px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-600 cursor-default">
+                ${tag}
+            </span>
+        `).join('');
+        pf_modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => {
+            pf_modalBackdrop.classList.remove('opacity-0');
+            pf_modalPanel.classList.remove('opacity-0', 'scale-95');
+            pf_modalPanel.classList.add('modal-animate-in');
+        });
+    }
+
+    window.pf_closeModal = function() {
+        pf_modalBackdrop.classList.add('opacity-0');
+        pf_modalPanel.classList.remove('modal-animate-in');
+        pf_modalPanel.classList.add('opacity-0', 'scale-95');
+        setTimeout(() => {
+            pf_modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }, 250);
+    }
+
+    if(pf_modal) {
+        pf_modal.addEventListener('click', (e) => {
+            if (e.target === pf_modal || e.target.closest('#pf-modalBackdrop')) pf_closeModal();
+        });
+    }
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') pf_closeModal(); });
+
+    // Inicjalizacja
+    pf_renderProjects(pf_projectsData);
+</script>
                 <footer class="bg-white border-t border-slate-200 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
