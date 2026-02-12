@@ -153,12 +153,10 @@
             bottom: 50px;
         }
     </style>
-    <style>
-    /* Ukrywanie paska przewijania tylko wewnątrz tego komponentu */
+<style>
     .portfolio-wrapper .no-scrollbar::-webkit-scrollbar { display: none; }
     .portfolio-wrapper .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Animacje */
     @keyframes portfolioFadeUp {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
@@ -229,10 +227,10 @@
             </div>
         </div>
     </nav>
-<div class="portfolio-wrapper text-slate-900 antialiased w-full flex flex-col items-center py-12 px-4 sm:px-6 relative">
+<div class="portfolio-wrapper text-slate-900 antialiased w-full flex flex-col items-center mt-32 mb-12 px-4 sm:px-6 relative">
 
     <div class="w-full max-w-6xl">
- <section>
+
         <!-- WYSZUKIWARKA -->
         <div class="flex justify-center mb-16 animate-enter">
             <div class="relative w-full max-w-md">
@@ -260,7 +258,6 @@
     </div>
 
     <!-- MODAL (OKNO) -->
-    <!-- Z-index ustawiony wysoko, żeby przykrył menu Twojej strony -->
     <div id="pf-projectModal" class="fixed inset-0 z-[9999] hidden" role="dialog" aria-modal="true" style="z-index: 9999;">
         <div class="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity opacity-0 duration-300" id="pf-modalBackdrop"></div>
 
@@ -298,7 +295,6 @@
 
 <!-- SEKCJA 3: JAVASCRIPT (LOGIKA) -->
 <script>
-    // DANE (Twoje teksty i linki - niezmienione)
     const pf_projectsData = [
         {
             id: 1,
@@ -393,7 +389,6 @@
         }
     ];
 
-    // Elementy DOM (Dodałem prefix 'pf-', żeby nie gryzły się z Twoją stroną)
     const pf_grid = document.getElementById('pf-projectsGrid');
     const pf_searchInput = document.getElementById('pf-searchInput');
     const pf_emptyState = document.getElementById('pf-emptyState');
@@ -434,7 +429,7 @@
     }
 
     function pf_renderProjects(data) {
-        if(!pf_grid) return; // Zabezpieczenie
+        if(!pf_grid) return;
         pf_grid.innerHTML = '';
         if (data.length === 0) {
             pf_grid.classList.add('hidden');
@@ -460,7 +455,6 @@
         });
     }
 
-    // Funkcje globalne (window) żeby działały z onclick w HTML
     window.pf_openModal = function(id) {
         const project = pf_projectsData.find(p => p.id === id);
         if (!project) return;
@@ -498,7 +492,6 @@
     }
     document.addEventListener('keydown', (e) => { if(e.key === 'Escape') pf_closeModal(); });
 
-    // Inicjalizacja
     pf_renderProjects(pf_projectsData);
 </script>
                 <footer class="bg-white border-t border-slate-200 py-12">
