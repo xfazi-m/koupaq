@@ -309,6 +309,143 @@
             letter-spacing: -0.01em;
         }
     </style>
+     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+        .reviews-section {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .reviews-header h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0 0 10px 0;
+        }
+
+        .reviews-header p {
+            color: #666;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .reviews-wrapper {
+            max-width: 1000px;
+            height: 450px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            position: relative;
+            mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+        }
+
+        @media (max-width: 768px) {
+            .reviews-wrapper {
+                grid-template-columns: 1fr;
+                height: 500px;
+            }
+            .column-2, .column-3 {
+                display: none;
+            }
+        }
+
+        .review-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .review-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06); 
+            border: 1px solid #f5f5f5;
+            transition: transform 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-info h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0;
+            color: #222;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .user-info span {
+            font-size: 11px;
+            color: #888;
+            display: block;
+        }
+
+        .card-content {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #444;
+        }
+        .scroll-up {
+            animation: scrollUp 45s linear infinite;
+        }
+
+        .scroll-down {
+            animation: scrollDown 45s linear infinite;
+        }
+
+        .reviews-wrapper:hover .review-column {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        @keyframes scrollDown {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0); }
+        }
+
+    </style>
 </head>
 <button id="backToTop" class="btt-button" aria-label="Wróć na górę">
         <svg class="btt-icon" viewBox="0 0 24 24">
@@ -570,109 +707,201 @@
         </div>
     </section>
  
- <div class="sekcja-opinii">
-        <div class="naglowek">
-            <h2>Co mówią klienci?</h2>
+    <section class="reviews-section">
+        <div class="reviews-header">
+            <h2>Opinie Klientów</h2>
+            <p>Sprawdź, co mówią osoby, które już skorzystały z moich usług</p>
         </div>
-
-        <div class="op-marquee-container">
-            <div class="op-track">
-                
-                <!-- === ZESTAW 1 (Oryginał) === -->
-                
-                <div class="op-card">
-                    <div class="op-stars">★★★★★</div>
-                    <p class="op-text">"Zajebiste grafiki administracja dowalona"</p>
-                    <div class="op-profile">
-                        <div class="op-avatar">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        <div class="reviews-wrapper">
+            <div class="review-column scroll-up">
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/Nl0neA4.png" alt="79MP"></div>
+                        <div class="user-info">
+                            <h3>@79MP</h3>
+                            <span>Klient</span>
                         </div>
-                        <span class="op-username">nawalony</span>
                     </div>
+                    <div class="card-content">Koupaczek jak zawsze dowiózł, nic dodać nic ująć, jakość i profesjonalizm jak zawsze</div>
                 </div>
-
-                <div class="op-card">
-                    <div class="op-stars">★★★★★</div>
-                    <p class="op-text">"Koupaczek jak zawsze dowiózł, nic dodać nic ująć, jakość i profesjonalizm jak zawsze"</p>
-                    <div class="op-profile">
-                        <div class="op-avatar">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/Hk68C8z.png" alt="bricklez"></div>
+                        <div class="user-info">
+                            <h3>@bricklez</h3>
+                            <span>Klient</span>
                         </div>
-                        <span class="op-username">79MP</span>
                     </div>
+                    <div class="card-content">Najlepsze miniaturki pod słońcem i na całej planecie ziemia 😲</div>
                 </div>
-
-                <div class="op-card">
-                    <div class="op-stars">★★★★★</div>
-                    <p class="op-text">"dobra jakosc praca zrobiona szybko polecam"</p>
-                    <div class="op-profile">
-                        <div class="op-avatar">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/LY2ajah.png" alt="Zesty"></div>
+                        <div class="user-info">
+                            <h3>@Kyzo</h3>
+                            <span>Klient</span>
                         </div>
-                        <span class="op-username">Eck0!</span>
                     </div>
+                    <div class="card-content">zajebista grafika</div>
                 </div>
-
-                 <div class="op-card">
-                    <div class="op-stars">★★★★★</div>
-                    <p class="op-text">"Szybkie wykonanie, bezproblemowa poprawa elementów, polecam!"</p>
-                    <div class="op-profile">
-                        <div class="op-avatar">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/Nl0neA4.png" alt="79MP"></div>
+                        <div class="user-info">
+                            <h3>@79MP</h3>
+                            <span>Klient</span>
                         </div>
-                        <span class="op-username">Kaczmar</span>
                     </div>
+                    <div class="card-content">Koupaczek jak zawsze dowiózł, nic dodać nic ująć, jakość i profesjonalizm jak zawsze</div>
                 </div>
-
-                <!-- === ZESTAW 2 (Kopia dla pętli) === -->
-                
-                <div class="op-card">
-                    <div class="op-stars">★★★★★</div>
-                    <p class="op-text">"Zajebiste grafiki administracja dowalona"</p>
-                    <div class="op-profile">
-                        <div class="op-avatar">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/Hk68C8z.png" alt="bricklez"></div>
+                        <div class="user-info">
+                            <h3>@bricklez</h3>
+                            <span>Klient</span>
                         </div>
-                        <span class="op-username">nawalony</span>
                     </div>
+                    <div class="card-content">Najlepsze miniaturki pod słońcem i na całej planecie ziemia 😲</div>
                 </div>
-
-                <div class="op-card">
-                    <div class="op-stars">★★★★★</div>
-                    <p class="op-text">"Koupaczek jak zawsze dowiózł, nic dodać nic ująć, jakość i profesjonalizm jak zawsze"</p>
-                    <div class="op-profile">
-                        <div class="op-avatar">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/LY2ajah.png" alt="Zesty"></div>
+                        <div class="user-info">
+                            <h3>@Kyzo</h3>
+                            <span>Klient</span>
                         </div>
-                        <span class="op-username">79MP</span>
                     </div>
+                    <div class="card-content">zajebista grafika</div>
                 </div>
-
-                <div class="op-card">
-                    <div class="op-stars">★★★★★</div>
-                    <p class="op-text">"dobra jakosc praca zrobiona szybko polecam"</p>
-                    <div class="op-profile">
-                        <div class="op-avatar">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                        </div>
-                        <span class="op-username">Eck0!</span>
-                    </div>
-                </div>
-
-                 <div class="op-card">
-                    <div class="op-stars">★★★★★</div>
-                    <p class="op-text">"Szybkie wykonanie, bezproblemowa poprawa elementów, polecam!"</p>
-                    <div class="op-profile">
-                        <div class="op-avatar">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                        </div>
-                        <span class="op-username">Kaczmar</span>
-                    </div>
-                </div>
-
             </div>
+            <div class="review-column column-2 scroll-down">
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/8a6eJkT.png" alt="pvptopa"></div>
+                        <div class="user-info">
+                            <h3>@pvptopa</h3>
+                            <span>Klient</span>
+                        </div>
+                    </div>
+                    <div class="card-content">Banery fajne tylko ze czekałem 3 tygodnie oraz tiktoki fajne robi</div>
+                </div>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/18Y64Ko.png" alt="k3xmuz"></div>
+                        <div class="user-info">
+                            <h3>@k3xmuz</h3>
+                            <span>Klient</span>
+                        </div>
+                    </div>
+                    <div class="card-content">Zajebista robota troche długo ale za to jak wyszły banery pomijam ten długi czas</div>
+                </div>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/awxKcdN.png" alt="Wikiks"></div>
+                        <div class="user-info">
+                            <h3>@Kaczmar</h3>
+                            <span>Klient</span>
+                        </div>
+                    </div>
+                    <div class="card-content">Elegancka Grafika, syzbkie wykonanie polecam</div>
+                </div>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/8a6eJkT.png" alt="pvptopa"></div>
+                        <div class="user-info">
+                            <h3>@pvptopa</h3>
+                            <span>Klient</span>
+                        </div>
+                    </div>
+                    <div class="card-content">Banery fajne tylko ze czekałem 3 tygodnie oraz tiktoki fajne robi</div>
+                </div>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/18Y64Ko.png" alt="k3xmuz"></div>
+                        <div class="user-info">
+                            <h3>@k3xmuz</h3>
+                            <span>Klient</span>
+                        </div>
+                    </div>
+                    <div class="card-content">Zajebista robota troche długo ale za to jak wyszły banery pomijam ten długi czas</div>
+                </div>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/awxKcdN.png" alt="Wikiks"></div>
+                        <div class="user-info">
+                            <h3>@Kaczmar</h3>
+                            <span>Klient</span>
+                        </div>
+                    </div>
+                    <div class="card-content">Elegancka Grafika, syzbkie wykonanie polecam</div>
+                </div>
+            </div>
+            <div class="review-column column-3 scroll-up">
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/GrmFPNQ.png" alt="xfendziak"></div>
+                        <div class="user-info">
+                            <h3>@xfendziak</h3>
+                            <span>Klient</span>
+                        </div>
+                    </div>
+                    <div class="card-content">Sigma Embedziki na dc</div>
+                </div>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/mpdJCSp.gif" alt="eck0!"></div>
+                        <div class="user-info">
+                            <h3>@Eck0!</h3>
+                            <span>Klient</span>
+                        </div>
+                    </div>
+                    <div class="card-content">dobra jakosc praca zrobiona szybko polecam</div>
+                </div>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/YDCrWq0.png" alt="Koti"></div>
+                        <div class="user-info">
+                            <h3>@PRXT</h3>
+                            <span>Klient</span>
+                        </div>
+                    </div>
+                    <div class="card-content">Doskonała robota</div>
+                </div>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/GrmFPNQ.png" alt="xfendziak"></div>
+                        <div class="user-info">
+                            <h3>@xfendziak</h3>
+                            <span>Klient</span>
+                        </div>
+                    </div>
+                    <div class="card-content">Sigma Embedziki na dc</div>
+                </div>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/mpdJCSp.gif" alt="eck0!"></div>
+                        <div class="user-info">
+                            <h3>@Eck0!</h3>
+                            <span>Klient</span>
+                        </div>
+                    </div>
+                    <div class="card-content">dobra jakosc praca zrobiona szybko polecam</div>
+                </div>
+                <div class="review-card">
+                    <div class="card-header">
+                        <div class="avatar"><img src="https://i.imgur.com/YDCrWq0.png" alt="Koti"></div>
+                        <div class="user-info">
+                            <h3>@PRXT</h3>
+                            <span>Klient</span>
+                        </div>
+                    </div>
+                    <div class="card-content">Doskonała robota</div>
+                </div>
+            </div>
+
         </div>
-    </div>
+    </section>
  
     <section id="kontakt" class="py-24 bg-white relative overflow-hidden border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
