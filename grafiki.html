@@ -28,15 +28,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koupaq</title>
+    <title>Koupaq.pl - Grafiki</title>
     <meta name="description" content="Profesjonalne grafiki.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -52,7 +50,6 @@
                     animation: {
                         'blob': 'blob 10s infinite',
                         'float': 'float 6s ease-in-out infinite',
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
                     },
                     keyframes: {
                         blob: {
@@ -60,21 +57,12 @@
                             '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
                             '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
                             '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
                         }
                     }
                 }
             }
         }
     </script>
-
     <style>
         body {
             background-color: #FAFAFA;
@@ -82,14 +70,12 @@
             overflow-x: hidden;
         }
 
-
         .glass-nav {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(226, 232, 240, 0.6);
         }
-
 
         ::-webkit-scrollbar {
             width: 10px;
@@ -105,127 +91,52 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
-
-        .reveal-on-scroll {
+        .reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-scale {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-
-        .reveal-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .stagger-delay-1 { transition-delay: 100ms; }
-        .stagger-delay-2 { transition-delay: 200ms; }
-        .stagger-delay-3 { transition-delay: 300ms; }
-
-        .project-card {
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        
-        .project-thumb {
-            transition: box-shadow 0.4s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            z-index: 10;
-        }
-
-        .project-card:hover .project-thumb {
-            box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.25);
-        }
-
-        .project-card img {
-            transition: transform 0.6s ease;
-        }
-        .project-card:hover img {
-            transform: scale(1.05);
-        }
-
-
-        .modal-backdrop {
-            transition: opacity 0.3s ease-out;
-        }
-        .modal-panel {
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        
-        #toast {
             visibility: hidden;
-            min-width: 250px;
-            background-color: #1e293b;
-            color: #fff;
-            text-align: center;
-            border-radius: 50px;
-            padding: 16px;
-            position: fixed;
-            z-index: 100;
-            left: 50%;
-            bottom: 30px;
-            transform: translateX(-50%) translateY(20px);
-            font-size: 14px;
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            will-change: transform, opacity;
         }
-        #toast.show {
-            visibility: visible;
+
+        .reveal-up { transform: translateY(60px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal-down { transform: translateY(-60px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal-left { transform: translateX(-60px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal-right { transform: translateX(60px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal-scale { transform: scale(0.85); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+
+        .reveal-up.is-visible,
+        .reveal-down.is-visible,
+        .reveal-left.is-visible,
+        .reveal-right.is-visible,
+        .reveal-scale.is-visible {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
-            bottom: 50px;
+            visibility: visible;
+            transform: translate(0) scale(1);
         }
-    </style>
 
-<style>
-    #pf-component-root {
-        font-family: 'Inter', sans-serif;
-        color: #0f172a; 
-        box-sizing: border-box;
-    }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        @keyframes pfFadeUpScale {
+            0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .pf-animate-enter {
+            animation: pfFadeUpScale 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            opacity: 0;
+        }
 
-    #pf-component-root * {
-        box-sizing: border-box;
-    }
+        .pf-search-input:focus {
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+            outline: none;
+        }
 
-    .pf-no-scrollbar::-webkit-scrollbar { display: none; }
-    .pf-no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes pfModalPop {
+            0% { opacity: 0; transform: scale(0.96) translateY(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .pf-modal-animate-in {
+            animation: pfModalPop 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
 
-    @keyframes pfFadeUp {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    .pf-animate-enter {
-        animation: pfFadeUp 0.5s ease-out forwards;
-        opacity: 0;
-    }
-    .pf-search-input:focus {
-        box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
-        outline: none;
-    }
-    @keyframes pfModalPop {
-        0% { opacity: 0; transform: scale(0.96); }
-        100% { opacity: 1; transform: scale(1); }
-    }
-    .pf-modal-animate-in {
-        animation: pfModalPop 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    }
-    .pf-tag-pill {
-        background-color: #f3f4f6;
-        transition: background-color 0.2s;
-    }
-    .pf-tag-pill:hover {
-        background-color: #e5e7eb;
-    }
-    #pf-component-root img {
-        display: block;
-        max-width: 100%;
-        height: auto;
-    }
-</style>
-     <style>
         #goTop {
             position: fixed; bottom: 25px; right: 25px; z-index: 2147483647;
             width: 45px; height: 45px; border-radius: 50%;
@@ -237,15 +148,12 @@
         }
         #goTop.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
         #goTop:hover { transform: translateY(-5px); background: #000; }
-        body { height: 3000px; background: #f0f0f0; } 
+        
+        .pf-no-scrollbar::-webkit-scrollbar { display: none; }
+        .pf-no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
- <div id="goTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 19V5M5 12l7-7 7 7"/>
-        </svg>
-    </div>
-<body class="antialiased relative selection:bg-indigo-100 selection:text-indigo-700">
+<body class="antialiased relative selection:bg-indigo-100 selection:text-indigo-700 min-h-screen flex flex-col">
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
         <div class="absolute top-[-10%] left-[-10%] w-[40rem] h-[40rem] bg-purple-100 rounded-full mix-blend-multiply filter blur-[100px] opacity-50 animate-blob"></div>
         <div class="absolute top-[-10%] right-[-10%] w-[40rem] h-[40rem] bg-indigo-100 rounded-full mix-blend-multiply filter blur-[100px] opacity-50 animate-blob animation-delay-2000"></div>
@@ -255,15 +163,15 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <span class="text-2xl font-bold tracking-tighter text-slate-900 group">
-                        Koupaq<span class="text-indigo-600 group-hover:text-indigo-500 transition-colors">.</span>
-                    </span>
+                    <a href="index.html" class="text-2xl font-bold tracking-tighter text-slate-900 flex items-center gap-2 group">
+                        <span>Koupaq<span class="text-indigo-600 group-hover:text-indigo-500 transition-colors">.</span></span>
+                    </a>
                 </div>
                 <div class="hidden md:flex items-center gap-8 ml-auto">
-                    <a href="https://koupaq.xfazi.pl" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">O mnie</a>
-                    <a href="https://koupaq.xfazi.pl/grafiki" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">Grafiki</a>
-                    <a href="https://koupaq.xfazi.pl" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">Opinie</a>
-                    <a href="https://koupaq.xfazi.pl" class="bg-slate-900 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-indigo-600 hover:shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 transform hover:-translate-y-0.5">
+                    <a href="index.html#o-mnie" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">O mnie</a>
+                    <a href="grafiki.html" class="text-sm font-medium text-indigo-600 transition-colors">Grafiki</a>
+                    <a href="index.html#opinie" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">Opinie</a>
+                    <a href="index.html#kontakt" class="bg-slate-900 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-indigo-600 hover:shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 transform hover:-translate-y-0.5">
                         Współpraca
                     </a>
                 </div>
@@ -278,316 +186,238 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-xl transform origin-top transition-transform duration-300">
             <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col items-center">
-                <a href="https://koupaq.xfazi.pl" class="mobile-link block w-full text-center px-3 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-indigo-600">O mnie</a>
-                <a href="https://koupaq.xfazi.pl/grafiki" class="mobile-link block w-full text-center px-3 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-indigo-600">Grafiki</a>
-                <a href="https://koupaq.xfazi.pl" class="mobile-link block w-full text-center px-3 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-indigo-600">Opinie</a>
-                <a href="https://koupaq.xfazi.pl" class="mobile-link mt-4 w-full text-center bg-indigo-600 text-white px-6 py-3 rounded-xl font-medium shadow-md active:scale-95 transition-transform">Współpraca</a>
+                <a href="index.html#o-mnie" class="mobile-link block w-full text-center px-3 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-indigo-600">O mnie</a>
+                <a href="grafiki.html" class="mobile-link block w-full text-center px-3 py-3 rounded-xl text-base font-medium text-indigo-600 hover:bg-slate-50">Grafiki</a>
+                <a href="index.html#opinie" class="mobile-link block w-full text-center px-3 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-indigo-600">Opinie</a>
+                <a href="index.html#kontakt" class="mobile-link mt-4 w-full text-center bg-indigo-600 text-white px-6 py-3 rounded-xl font-medium shadow-md active:scale-95 transition-transform">Współpraca</a>
             </div>
         </div>
     </nav>
-<div id="pf-component-root" class="w-full flex flex-col items-center pt-[150px] pb-12 px-4 sm:px-6 relative">
-    <div class="w-full max-w-6xl">
-        <div class="flex justify-center mb-16 pf-animate-enter">
-            <div class="relative w-full max-w-md">
-                <i class="ph ph-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl"></i>
-                <input 
-                    type="text" 
-                    id="pf-searchInput" 
-                    placeholder="Szukaj (np. Miniaturka, Embed)..." 
-                    class="pf-search-input w-full bg-gray-50 border border-gray-200 text-gray-800 text-sm font-medium rounded-full py-3.5 pl-12 pr-4 transition-all placeholder-gray-400 hover:bg-gray-100 focus:bg-white focus:border-gray-300"
-                    autocomplete="off"
-                >
+    <div id="pf-component-root" class="w-full flex-grow flex flex-col items-center pt-[150px] pb-12 px-4 sm:px-6 relative">
+        <div class="w-full max-w-6xl">
+            <div class="flex justify-center mb-16 reveal-scale">
+                <div class="relative w-full max-w-md group">
+                    <div class="absolute inset-0 bg-indigo-600/5 rounded-full blur-md transform group-hover:scale-105 transition-transform duration-300"></div>
+                    <i class="ph ph-magnifying-glass absolute left-5 top-1/2 transform -translate-y-1/2 text-indigo-400 text-xl z-10"></i>
+                    <input 
+                        type="text" 
+                        id="pf-searchInput" 
+                        placeholder="Szukaj (np. Miniaturka, Embed)..." 
+                        class="pf-search-input relative z-10 w-full bg-white/80 backdrop-blur-sm border border-slate-200 text-slate-800 text-[15px] font-medium rounded-full py-4 pl-14 pr-6 transition-all shadow-sm placeholder-slate-400 hover:border-indigo-300 focus:bg-white focus:border-indigo-500"
+                        autocomplete="off"
+                    >
+                </div>
+            </div>
+            <div id="pf-projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+            </div>
+            <div id="pf-emptyState" class="hidden flex-col items-center justify-center py-20 opacity-0 transition-opacity duration-300">
+                <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mb-4">
+                    <i class="ph ph-magnifying-glass text-2xl"></i>
+                </div>
+                <span class="text-slate-500 font-medium">Brak wyników wyszukiwania</span>
             </div>
         </div>
-        <div id="pf-projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
-        </div>
-        <div id="pf-emptyState" class="hidden flex-col items-center justify-center py-20 opacity-0 transition-opacity duration-300">
-            <span class="text-gray-400 text-sm">Brak wyników wyszukiwania</span>
-        </div>
-    </div>
-    <div id="pf-projectModal" class="fixed inset-0 z-[99999] hidden" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity opacity-0 duration-300" id="pf-modalBackdrop"></div>
-        <div class="fixed inset-0 z-[100000] overflow-y-auto pf-no-scrollbar">
-            <div class="flex min-h-full items-center justify-center p-4">
-                <div class="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all text-left" id="pf-modalPanel">
-                    <button onclick="pf_closeModal()" class="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center bg-white/80 hover:bg-white backdrop-blur text-gray-800 rounded-full transition-all shadow-sm cursor-pointer border-0">
-                        <i class="ph ph-x text-sm font-bold"></i>
-                    </button>
-                    <div class="w-full aspect-video bg-gray-100">
-                        <img id="pf-modalImage" src="" alt="Podgląd" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-8">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-2 mt-0 leading-tight" id="pf-modalTitle">
-                            Tytuł Projektu
-                        </h2>
-                        <p class="text-gray-500 text-base leading-relaxed mb-6 mt-0" id="pf-modalDescription">
-                            Opis...
-                        </p>
-                        <div class="flex flex-wrap gap-2" id="pf-modalTags">
+        <div id="pf-projectModal" class="fixed inset-0 z-[99999] hidden" role="dialog" aria-modal="true">
+            <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity opacity-0 duration-300" id="pf-modalBackdrop"></div>
+            <div class="fixed inset-0 z-[100000] overflow-y-auto pf-no-scrollbar">
+                <div class="flex min-h-full items-center justify-center p-4">
+                    <div class="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all text-left" id="pf-modalPanel">
+                        <button onclick="pf_closeModal()" class="absolute top-4 right-4 z-20 w-10 h-10 flex items-center justify-center bg-white/90 hover:bg-white backdrop-blur text-slate-800 rounded-full transition-all shadow-sm cursor-pointer border-0 group hover:shadow-md">
+                            <i class="ph ph-x text-lg font-bold group-hover:rotate-90 transition-transform duration-300"></i>
+                        </button>
+                        <div class="w-full aspect-[16/9] bg-slate-100 relative">
+                            <img id="pf-modalImage" src="" alt="Podgląd" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                        </div>
+                        <div class="p-8 sm:p-10">
+                            <h2 class="text-3xl font-extrabold text-slate-900 mb-3 mt-0 leading-tight" id="pf-modalTitle">
+                                Tytuł Projektu
+                            </h2>
+                            <p class="text-slate-600 text-[17px] leading-relaxed mb-8 mt-0" id="pf-modalDescription">
+                                Opis...
+                            </p>
+                            <div class="flex flex-wrap gap-2" id="pf-modalTags">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script>
-    const pf_projectsData = [
-        {
-            id: 1,
-            title: "Embed Discord",
-            image: "https://i.imgur.com/gPZMlNu.png", 
-            description: "Profesjonalna paczka embedów na serwer discord",
-            tags: ["Adobe Photoshop", "Cinema 4D"] 
-        },
-        {
-            id: 2,
-            title: "Miniaturka",
-            image: "https://i.imgur.com/ZrL2Hcv.png",
-            description: "Profesjonalna miniaturka minecraft",
-            tags: ["Cinema 4D", "Photoshop"]
-        },
-        {
-            id: 3,
-            title: "Embed Discord",
-            image: "https://i.imgur.com/LgkZcGV.png",
-            description: "Profesjonalna paczka embedów na serwer discord",
-            tags: ["Cinema 4D", "Photoshop"]
-        },
-        {
-            id: 4,
-            title: "Miniaturka",
-            image: "https://i.imgur.com/8iE1trS.png",
-            description: "Profesjonalna miniaturka minecraft",
-            tags: ["Adobe Photoshop", "Cinema 4D"]
-        },
-        {
-            id: 5,
-            title: "Baner",
-            image: "https://i.imgur.com/NBxE8E9.png",
-            description: "Baner na YT",
-            tags: ["Cinema 4D", "Photoshop"]
-        },
-        {
-            id: 6,
-            title: "Miniaturka",
-            image: "https://i.imgur.com/Pu6yjqZ.png",
-            description: "Profesjonalna miniaturka minecraft",
-            tags: ["Cinema 4D", "Photoshop"]
-        },
-        {
-            id: 7,
-            title: "Embed",
-            image: "https://i.imgur.com/16WJGzf.png",
-            description: "Profesjonalna paczka embedów na serwer discord.",
-            tags: ["Cinema 4D", "Photoshop"]
-        },
-        {
-            id: 8,
-            title: "Miniaturka",
-            image: "https://i.imgur.com/enlSyt2.png",
-            description: "Profesjonalna miniaturka minecraft",
-            tags: ["Cinema 4D", "Photoshop"]
-        },
-        {
-            id: 9,
-            title: "Miniaturka",
-            image: "https://i.imgur.com/LBYmaOa.png",
-            description: "Profesjonalna miniaturka minecraft",
-            tags: ["Cinema 4D", "Photoshop"]
-        },
-        {
-            id: 10,
-            title: "Miniaturka",
-            image: "https://i.imgur.com/YwkPrQR.png",
-            description: "Profesjonalna miniaturka minecraft",
-            tags: ["Cinema 4D", "Photoshop"]
-        },
-        {
-            id: 11,
-            title: "Miniaturka",
-            image: "https://i.imgur.com/yAF2uaV.png",
-            description: "Profesjonalna miniaturka minecraft",
-            tags: ["Cinema 4D", "Photoshop"]
-        },
-        {
-            id: 12,
-            title: "Miniaturka",
-            image: "https://i.imgur.com/9NAiHor.png",
-            description: "Profesjonalna miniaturka minecraft",
-            tags: ["Cinema 4D", "Photoshop"]
-        },
-        {
-            id: 13,
-            title: "Miniaturka",
-            image: "https://i.imgur.com/v3yCo8G.png",
-            description: "Profesjonalna miniaturka minecraft",
-            tags: ["Cinema 4D", "Photoshop"]
-        }
-    ];
-    const pf_grid = document.getElementById('pf-projectsGrid');
-    const pf_searchInput = document.getElementById('pf-searchInput');
-    const pf_emptyState = document.getElementById('pf-emptyState');
-    const pf_modal = document.getElementById('pf-projectModal');
-    const pf_modalPanel = document.getElementById('pf-modalPanel');
-    const pf_modalBackdrop = document.getElementById('pf-modalBackdrop');
-    const pf_modalTitle = document.getElementById('pf-modalTitle');
-    const pf_modalImage = document.getElementById('pf-modalImage');
-    const pf_modalDesc = document.getElementById('pf-modalDescription');
-    const pf_modalTags = document.getElementById('pf-modalTags');
-    function pf_createCard(project, index) {
-        const delay = index * 50;
-        return `
-            <div 
-                class="group cursor-pointer pf-animate-enter block"
-                style="animation-delay: ${delay}ms; text-decoration: none;"
-                onclick="pf_openModal(${project.id})"
-            >
-                <div class="w-full aspect-[16/9] rounded-2xl overflow-hidden mb-3 bg-gray-100 transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1 relative">
-                    <img 
-                        src="${project.image}" 
-                        alt="${project.title}" 
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 block"
-                        loading="lazy"
-                    >
+    <footer class="bg-white border-t border-slate-200 pt-16 pb-8 relative overflow-hidden mt-auto">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
+                <div class="flex-shrink-0 reveal-left">
+                    <a href="index.html" class="text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2 group">
+                        <span>Koupaq<span class="text-indigo-600">.</span></span>
+                    </a>
                 </div>
-                <div class="flex items-center justify-between px-1">
-                    <h3 class="text-[17px] font-bold text-gray-900 group-hover:text-black transition-colors m-0 leading-normal">
-                        ${project.title}
-                    </h3>
-                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 transition-all duration-300 group-hover:bg-blue-100 group-hover:text-blue-600">
-                        <i class="ph ph-arrow-right text-sm font-bold transform group-hover:-rotate-45 transition-transform duration-300"></i>
-                    </div>
+                <nav class="flex items-center gap-6 md:gap-10 reveal-up delay-100">
+                    <a href="index.html#o-mnie" class="text-[15px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors">O mnie</a>
+                    <a href="grafiki.html" class="text-[15px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Grafiki</a>
+                    <a href="index.html#opinie" class="text-[15px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Opinie</a>
+                </nav>
+                <div class="reveal-right">
+                    <a href="index.html#kontakt" class="inline-flex items-center gap-2 bg-indigo-600 text-white px-7 py-3 rounded-full text-[14px] font-bold tracking-wide hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 transform hover:-translate-y-0.5 group">
+                        Kontakt
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
                 </div>
             </div>
-        `;
-    }
-    function pf_renderProjects(data) {
-        if(!pf_grid) return;
-        pf_grid.innerHTML = '';
-        if (data.length === 0) {
-            pf_grid.classList.add('hidden');
-            pf_emptyState.classList.remove('hidden');
-            pf_emptyState.classList.add('flex');
-            setTimeout(() => pf_emptyState.classList.remove('opacity-0'), 10);
-        } else {
-            pf_grid.classList.remove('hidden');
-            pf_emptyState.classList.add('hidden');
-            pf_emptyState.classList.remove('flex');
-            pf_emptyState.classList.add('opacity-0');
-            data.forEach((project, index) => {
-                pf_grid.innerHTML += pf_createCard(project, index);
-            });
-        }
-    }
-
-    if(pf_searchInput) {
-        pf_searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase().trim();
-            const filtered = pf_projectsData.filter(p => p.title.toLowerCase().includes(term));
-            pf_renderProjects(filtered);
-        });
-    }
-
-    window.pf_openModal = function(id) {
-        const project = pf_projectsData.find(p => p.id === id);
-        if (!project) return;
-        pf_modalTitle.textContent = project.title;
-        pf_modalDesc.textContent = project.description;
-        pf_modalImage.src = project.image;
-        pf_modalTags.innerHTML = project.tags.map(tag => `
-            <span class="pf-tag-pill px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-600 cursor-default">
-                ${tag}
-            </span>
-        `).join('');
-        pf_modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-        requestAnimationFrame(() => {
-            pf_modalBackdrop.classList.remove('opacity-0');
-            pf_modalPanel.classList.remove('opacity-0', 'scale-95');
-            pf_modalPanel.classList.add('pf-modal-animate-in');
-        });
-    }
-
-    window.pf_closeModal = function() {
-        pf_modalBackdrop.classList.add('opacity-0');
-        pf_modalPanel.classList.remove('pf-modal-animate-in');
-        pf_modalPanel.classList.add('opacity-0', 'scale-95');
-        setTimeout(() => {
-            pf_modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }, 250);
-    }
-
-    if(pf_modal) {
-        pf_modal.addEventListener('click', (e) => {
-            if (e.target === pf_modal || e.target.closest('#pf-modalBackdrop')) pf_closeModal();
-        });
-    }
-    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') pf_closeModal(); });
-
-    pf_renderProjects(pf_projectsData);
-</script>
-                <footer class="bg-white border-t border-slate-200 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <span class="text-xl font-bold tracking-tighter text-slate-900">
-                        Koupaq<span class="text-indigo-600">.</span>
-                    </span>
-                    <p class="text-sm text-slate-500 mt-1">&copy; 2024 Wszelkie prawa zastrzeżone.</p>
+            <div class="h-px w-full bg-slate-200 mb-8 reveal-scale"></div>
+            <div class="flex flex-col-reverse md:flex-row justify-between items-center gap-6">
+                <p class="text-sm text-slate-500 font-medium reveal-left">&copy; 2024 Koupaq. Wszelkie prawa zastrzeżone.</p>
+                <div class="flex items-center gap-5 reveal-right">
+                    <a href="https://discord.com/users/1186281697872986152" target="_blank" class="text-slate-400 hover:text-indigo-600 transform hover:scale-110 transition-all duration-300">
+                        <span class="sr-only">Discord</span>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.418 2.157-2.418 1.21 0 2.176 1.095 2.157 2.418 0 1.334-.956 2.419-2.157 2.419zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.095 2.157 2.418 0 1.334-.946 2.419-2.157 2.419z"/></svg>
+                    </a>
+                    <a href="Koupaq Design" class="text-slate-400 hover:text-indigo-600 transform hover:scale-110 transition-all duration-300">
+                        <span class="sr-only">Instagram</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="2"></rect></svg>
+                    </a>
+                    <a href="mailto:koupaqdesign@gmail.com" class="text-slate-400 hover:text-indigo-600 transform hover:scale-110 transition-all duration-300">
+                        <span class="sr-only">Email</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </a>
                 </div>
             </div>
         </div>
     </footer>
-    <div id="project-modal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 modal-backdrop" id="modal-backdrop"></div>
-        <div class="fixed inset-0 z-10 overflow-y-auto">
-            <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-                <div class="relative transform overflow-hidden rounded-3xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-3xl opacity-0 scale-95 modal-panel" id="modal-panel">
-                    <button onclick="closeModal()" class="absolute top-4 right-4 z-20 bg-white/80 hover:bg-white p-2 rounded-full transition-all shadow-sm hover:shadow-md group">
-                        <svg class="w-6 h-6 text-slate-500 group-hover:text-slate-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                    <div class="bg-white">
-                        <div class="relative h-64 sm:h-96">
-                            <img id="modal-img" src="" alt="Project Detail" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                            <div class="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 text-white">
-                                <p class="text-sm font-medium opacity-90 mb-1" id="modal-category">Kategoria</p>
-                                <h3 class="text-3xl font-bold" id="modal-title">Miniaturki</h3>
-                            </div>
-                        </div>
-                        <div class="p-8 sm:p-10">
-                            <div class="prose prose-slate max-w-none">
-                                <p id="modal-description" class="text-slate-600 text-lg leading-relaxed">
-                                </p>
-                                <div class="mt-6 flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-sm font-medium">Adobe Photoshop</span>
-                                    <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-sm font-medium">Cinema 4D</span>
-                                    <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-sm font-medium">Illustrator</span>
-                                </div>
-                            </div>
+    <div id="goTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </div>
+
+    <script>
+        const pf_projectsData = [
+            { id: 1, title: "Embed Discord", image: "https://i.imgur.com/gPZMlNu.png", description: "Profesjonalna paczka embedów na serwer discord", tags: ["Adobe Photoshop", "Cinema 4D"] },
+            { id: 2, title: "Miniaturka", image: "https://i.imgur.com/ZrL2Hcv.png", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 3, title: "Embed Discord", image: "https://i.imgur.com/LgkZcGV.png", description: "Profesjonalna paczka embedów na serwer discord", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 4, title: "Miniaturka", image: "https://i.imgur.com/8iE1trS.png", description: "Profesjonalna miniaturka minecraft", tags: ["Adobe Photoshop", "Cinema 4D"] },
+            { id: 5, title: "Baner", image: "https://i.imgur.com/NBxE8E9.png", description: "Baner na YT", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 6, title: "Miniaturka", image: "https://i.imgur.com/Pu6yjqZ.png", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 7, title: "Embed", image: "https://i.imgur.com/16WJGzf.png", description: "Profesjonalna paczka embedów na serwer discord.", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 8, title: "Miniaturka", image: "https://i.imgur.com/enlSyt2.png", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 9, title: "Miniaturka", image: "https://i.imgur.com/LBYmaOa.png", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 10, title: "Miniaturka", image: "https://i.imgur.com/YwkPrQR.png", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 11, title: "Miniaturka", image: "https://i.imgur.com/yAF2uaV.png", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 12, title: "Miniaturka", image: "https://i.imgur.com/9NAiHor.png", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 13, title: "Miniaturka", image: "https://i.imgur.com/v3yCo8G.png", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] }
+        ];
+
+        const pf_grid = document.getElementById('pf-projectsGrid');
+        const pf_searchInput = document.getElementById('pf-searchInput');
+        const pf_emptyState = document.getElementById('pf-emptyState');
+        const pf_modal = document.getElementById('pf-projectModal');
+        const pf_modalPanel = document.getElementById('pf-modalPanel');
+        const pf_modalBackdrop = document.getElementById('pf-modalBackdrop');
+        const pf_modalTitle = document.getElementById('pf-modalTitle');
+        const pf_modalImage = document.getElementById('pf-modalImage');
+        const pf_modalDesc = document.getElementById('pf-modalDescription');
+        const pf_modalTags = document.getElementById('pf-modalTags');
+        function pf_createCard(project, index) {
+            const delay = (index % 6) * 100; 
+            return `
+                <div 
+                    class="group cursor-pointer pf-animate-enter block"
+                    style="animation-delay: ${delay}ms; text-decoration: none;"
+                    onclick="pf_openModal(${project.id})"
+                >
+                    <div class="w-full aspect-[4/3] rounded-3xl overflow-hidden mb-4 bg-slate-100 transition-all duration-500 shadow-sm border border-slate-100 group-hover:shadow-2xl group-hover:shadow-indigo-500/20 group-hover:-translate-y-2 relative">
+                        <img 
+                            src="${project.image}" 
+                            alt="${project.title}" 
+                            class="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110 block"
+                            loading="lazy"
+                        >
+                    </div>
+                    <div class="flex items-center justify-between px-2">
+                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors m-0 leading-normal">
+                            ${project.title}
+                        </h3>
+                        <div class="w-10 h-10 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 transition-all duration-300 group-hover:bg-indigo-600 group-hover:border-indigo-600 group-hover:text-white">
+                            <i class="ph ph-arrow-right text-base font-bold transform group-hover:-rotate-45 transition-transform duration-300"></i>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div id="toast">Skopiowano do schowka!</div>
-      <script>
-        window.addEventListener('scroll', () => 
-            document.getElementById('goTop').classList.toggle('show', window.scrollY > 300)
-        );
-    </script>
-    <script>
+            `;
+        }
+        function pf_renderProjects(data) {
+            if(!pf_grid) return;
+            pf_grid.innerHTML = '';
+            
+            if (data.length === 0) {
+                pf_grid.classList.add('hidden');
+                pf_emptyState.classList.remove('hidden');
+                pf_emptyState.classList.add('flex');
+                setTimeout(() => pf_emptyState.classList.remove('opacity-0'), 10);
+            } else {
+                pf_grid.classList.remove('hidden');
+                pf_emptyState.classList.add('hidden');
+                pf_emptyState.classList.remove('flex');
+                pf_emptyState.classList.add('opacity-0');
+                
+                data.forEach((project, index) => {
+                    pf_grid.innerHTML += pf_createCard(project, index);
+                });
+            }
+        }
+        if(pf_searchInput) {
+            pf_searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase().trim();
+                const filtered = pf_projectsData.filter(p => p.title.toLowerCase().includes(term) || p.tags.join(" ").toLowerCase().includes(term));
+                pf_renderProjects(filtered);
+            });
+        }
+        window.pf_openModal = function(id) {
+            const project = pf_projectsData.find(p => p.id === id);
+            if (!project) return;
+            pf_modalTitle.textContent = project.title;
+            pf_modalDesc.textContent = project.description;
+            pf_modalImage.src = project.image;
+            pf_modalTags.innerHTML = project.tags.map(tag => `
+                <span class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 bg-slate-100 border border-slate-200 cursor-default">
+                    ${tag}
+                </span>
+            `).join('');
+            
+            pf_modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            requestAnimationFrame(() => {
+                pf_modalBackdrop.classList.remove('opacity-0');
+                pf_modalPanel.classList.remove('opacity-0', 'scale-95');
+                pf_modalPanel.classList.add('pf-modal-animate-in');
+            });
+        }
+
+        window.pf_closeModal = function() {
+            pf_modalBackdrop.classList.add('opacity-0');
+            pf_modalPanel.classList.remove('pf-modal-animate-in');
+            pf_modalPanel.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                pf_modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        if(pf_modal) {
+            pf_modal.addEventListener('click', (e) => {
+                if (e.target === pf_modal || e.target.closest('#pf-modalBackdrop')) pf_closeModal();
+            });
+        }
+        document.addEventListener('keydown', (e) => { if(e.key === 'Escape') pf_closeModal(); });
         document.addEventListener('DOMContentLoaded', () => {
+            pf_renderProjects(pf_projectsData);
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
-                threshold: 0.1
+                threshold: 0.15
             };
+            
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -596,151 +426,24 @@
                     }
                 });
             }, observerOptions);
-            document.querySelectorAll('.reveal-on-scroll').forEach((element) => {
+            
+            document.querySelectorAll('.reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-scale').forEach((element) => {
                 observer.observe(element);
             });
             const btn = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
-            const links = document.querySelectorAll('.mobile-link');
-            btn.addEventListener('click', () => {
-                menu.classList.toggle('hidden');
-            });
-            links.forEach(link => {
-                link.addEventListener('click', () => {
-                    menu.classList.add('hidden');
-                });
-            });
-            const counters = document.querySelectorAll('.counter');
-            const counterObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const counter = entry.target;
-                        const target = +counter.getAttribute('data-target');
-                        const speed = 200;
-                        
-                        const updateCount = () => {
-                            const count = +counter.innerText;
-                            const inc = target / speed;
-                            
-                            if (count < target) {
-                                counter.innerText = Math.ceil(count + inc);
-                                setTimeout(updateCount, 20);
-                            } else {
-                                counter.innerText = target + (target > 90 ? '%' : '+');
-                            }
-                        };
-                        updateCount();
-                        observer.unobserve(counter);
-                    }
-                });
-            }, { threshold: 0.5 });
-            counters.forEach(counter => counterObserver.observe(counter));
-            const track = document.getElementById('slider-track');
-            const prevBtn = document.getElementById('prev-slide');
-            const nextBtn = document.getElementById('next-slide');
-            let slideIndex = 0;
-            function getItemsPerView() {
-                if (window.innerWidth >= 1024) return 3;
-                if (window.innerWidth >= 768) return 2;
-                return 1;
-            }
-            function updateSlider() {
-                const itemsPerView = getItemsPerView();
-                const itemWidth = 100 / itemsPerView;
-                track.style.transform = `translateX(-${slideIndex * itemWidth}%)`;
-            }
-            nextBtn.addEventListener('click', () => {
-                const itemsPerView = getItemsPerView();
-                const totalItems = 4; 
-                if (slideIndex < totalItems - itemsPerView) {
-                    slideIndex++;
-                    updateSlider();
-                }
-            });
-            prevBtn.addEventListener('click', () => {
-                if (slideIndex > 0) {
-                    slideIndex--;
-                    updateSlider();
-                }
-            });
-            window.addEventListener('resize', updateSlider);
-            const tiltContainer = document.querySelector('.perspective-container');
-            const tiltCard = tiltContainer.querySelector('div');
-            if(tiltContainer && window.matchMedia("(hover: hover)").matches) {
-                tiltContainer.addEventListener('mousemove', (e) => {
-                    const rect = tiltContainer.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const xPct = x / rect.width;
-                    const yPct = y / rect.height;
-                    const xRot = (0.5 - yPct) * 10; 
-                    const yRot = (xPct - 0.5) * 10;
-                    tiltCard.style.transform = `rotateX(${xRot}deg) rotateY(${yRot}deg) scale(1.02)`;
-                });
-                tiltContainer.addEventListener('mouseleave', () => {
-                    tiltCard.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+            if(btn && menu) {
+                btn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
                 });
             }
         });
-        const modal = document.getElementById('project-modal');
-        const modalBackdrop = document.getElementById('modal-backdrop');
-        const modalPanel = document.getElementById('modal-panel');
-        const modalImg = document.getElementById('modal-img');
-        const modalTitle = document.getElementById('modal-title');
-        const modalCategory = document.getElementById('modal-category');
-        const modalDescription = document.getElementById('modal-description');
-        function openModal(element) {
-            const title = element.getAttribute('data-title');
-            const category = element.getAttribute('data-category');
-            const description = element.getAttribute('data-description');
-            const imageSrc = element.getAttribute('data-image');
-            modalTitle.innerText = title;
-            modalCategory.innerText = category;
-            modalDescription.innerText = description;
-            modalImg.src = imageSrc;
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modalBackdrop.classList.remove('opacity-0');
-                modalPanel.classList.remove('opacity-0', 'scale-95');
-                modalPanel.classList.add('opacity-100', 'scale-100');
-            }, 10);
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modalBackdrop.classList.add('opacity-0');
-            modalPanel.classList.remove('opacity-100', 'scale-100');
-            modalPanel.classList.add('opacity-0', 'scale-95');
-            
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }, 300);
-        }
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modalBackdrop || e.target.closest('.fixed.inset-0.z-10') === e.target) {
-                closeModal();
+        window.addEventListener('scroll', () => {
+            const goTop = document.getElementById('goTop');
+            if(goTop) {
+                goTop.classList.toggle('show', window.scrollY > 300);
             }
         });
-        function copyToClipboard(text, btnElement) {
-            navigator.clipboard.writeText(text).then(() => {
-                const toast = document.getElementById('toast');
-                toast.classList.add('show');
-                setTimeout(() => { toast.classList.remove('show'); }, 3000);
-
-                const originalText = btnElement.innerText;
-                btnElement.innerText = "Skopiowano!";
-                btnElement.classList.add('bg-green-50', 'text-green-600', 'border-green-200');
-                btnElement.classList.remove('text-indigo-600', 'bg-white');
-                
-                setTimeout(() => {
-                    btnElement.innerText = originalText;
-                    btnElement.classList.remove('bg-green-50', 'text-green-600', 'border-green-200');
-                    btnElement.classList.add('text-indigo-600', 'bg-white');
-                }, 2000);
-            });
-        }
     </script>
 </body>
 </html>
