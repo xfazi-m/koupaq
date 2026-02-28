@@ -24,7 +24,7 @@
    
    CREATED BY: X_FAZI
 -->
-<html lang="pl" class="scroll-smooth">
+<html lang="pl" class="scroll-smooth bg-black">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +34,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -43,20 +42,16 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        primary: '#4F46E5', 
-                        secondary: '#ffffff',
-                        dark: '#0f172a',
+                        dark: '#000000',
                     },
                     animation: {
-                        'blob': 'blob 10s infinite',
-                        'float': 'float 6s ease-in-out infinite',
+                        'blob': 'blob 15s infinite alternate cubic-bezier(0.4, 0, 0.2, 1)',
                     },
                     keyframes: {
                         blob: {
                             '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '50%': { transform: 'translate(40px, -40px) scale(1.05)' },
+                            '100%': { transform: 'translate(-20px, 30px) scale(0.95)' },
                         }
                     }
                 }
@@ -65,43 +60,44 @@
     </script>
     <style>
         body {
-            background-color: #FAFAFA;
-            color: #1E293B;
+            background-color: #000000;
+            color: #ffffff;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: #000000;
         }
         ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 5px;
-            border: 2px solid #f1f1f1;
+            background: #27272a;
+            border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
+            background: #3f3f46;
         }
+        
         .reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-scale {
             opacity: 0;
             visibility: hidden;
             will-change: transform, opacity;
         }
 
-        .reveal-up { transform: translateY(60px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
-        .reveal-down { transform: translateY(-60px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
-        .reveal-left { transform: translateX(-60px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
-        .reveal-right { transform: translateX(60px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
-        .reveal-scale { transform: scale(0.85); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal-up { transform: translateY(40px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-down { transform: translateY(-40px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-left { transform: translateX(-40px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-right { transform: translateX(40px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-scale { transform: scale(0.9); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
 
         .reveal-up.is-visible,
         .reveal-down.is-visible,
@@ -115,68 +111,78 @@
 
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
+        
         @keyframes pfFadeUpScale {
             0% { opacity: 0; transform: translateY(40px) scale(0.95); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
         .pf-animate-enter {
-            animation: pfFadeUpScale 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation: pfFadeUpScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             opacity: 0;
         }
 
         .pf-search-input:focus {
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
             outline: none;
+            border-color: #ffffff;
         }
 
         @keyframes pfModalPop {
-            0% { opacity: 0; transform: scale(0.96) translateY(10px); }
+            0% { opacity: 0; transform: scale(0.95) translateY(20px); }
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
         .pf-modal-animate-in {
-            animation: pfModalPop 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation: pfModalPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         #goTop {
-            position: fixed; bottom: 25px; right: 25px; z-index: 2147483647;
-            width: 45px; height: 45px; border-radius: 50%;
-            background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(8px); color: #fff; cursor: pointer;
+            position: fixed; bottom: 30px; right: 30px; z-index: 90;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: #ffffff; color: #000000; cursor: pointer;
             display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            opacity: 0; pointer-events: none; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 20px rgba(255,255,255,0.15);
+            transform: translateY(20px) scale(0.9);
         }
-        #goTop.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
-        #goTop:hover { transform: translateY(-5px); background: #000; }
+        #goTop.show { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+        #goTop:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 25px rgba(255,255,255,0.25); }
         
         .pf-no-scrollbar::-webkit-scrollbar { display: none; }
         .pf-no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .pf-card-img {
+            filter: grayscale(20%);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+        }
+        .group:hover .pf-card-img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
     </style>
 </head>
-<body class="antialiased relative selection:bg-indigo-100 selection:text-indigo-700 min-h-screen flex flex-col">
-    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div class="absolute top-[-10%] left-[-10%] w-[40rem] h-[40rem] bg-purple-100 rounded-full mix-blend-multiply filter blur-[100px] opacity-50 animate-blob"></div>
-        <div class="absolute top-[-10%] right-[-10%] w-[40rem] h-[40rem] bg-indigo-100 rounded-full mix-blend-multiply filter blur-[100px] opacity-50 animate-blob animation-delay-2000"></div>
-        <div class="absolute bottom-[-20%] left-[20%] w-[40rem] h-[40rem] bg-blue-100 rounded-full mix-blend-multiply filter blur-[100px] opacity-50 animate-blob animation-delay-4000"></div>
+<body class="antialiased relative selection:bg-zinc-800 selection:text-white min-h-screen flex flex-col">
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-black">
+        <div class="absolute top-[-10%] left-[-10%] w-[40rem] h-[40rem] bg-zinc-600 rounded-full filter blur-[140px] opacity-[0.1] animate-blob"></div>
+        <div class="absolute top-[20%] right-[-10%] w-[50rem] h-[50rem] bg-zinc-400 rounded-full filter blur-[150px] opacity-[0.08] animate-blob" style="animation-delay: -5s;"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-[40rem] h-[40rem] bg-white rounded-full filter blur-[160px] opacity-[0.05] animate-blob" style="animation-delay: -10s;"></div>
     </div>
     <nav class="glass-nav fixed w-full z-50 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <a href="index.html" class="text-2xl font-bold tracking-tighter text-slate-900 flex items-center gap-2 group">
-                        <span>Koupaq<span class="text-indigo-600 group-hover:text-indigo-500 transition-colors">.</span></span>
+                    <a href="index.html" class="text-2xl font-bold tracking-tight text-white flex items-center gap-1 group">
+                        <span>Koupaq</span><span class="text-zinc-500 group-hover:text-white transition-colors">.</span>
                     </a>
                 </div>
-                <div class="hidden md:flex items-center gap-8 ml-auto">
-                    <a href="https://koupaq.pl" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">O mnie</a>
-                    <a href="" class="text-sm font-medium text-indigo-600 transition-colors">Grafiki</a>
-                    <a href="https://koupaq.pl" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">Opinie</a>
-                    <a href="https://koupaq.pl" class="bg-slate-900 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-indigo-600 hover:shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 transform hover:-translate-y-0.5">
+                <div class="hidden md:flex items-center gap-10 ml-auto">
+                    <a href="index.html#o-mnie" class="text-[14px] uppercase tracking-wider font-semibold text-zinc-400 hover:text-white transition-colors duration-300">O mnie</a>
+                    <a href="" class="text-[14px] uppercase tracking-wider font-semibold text-white transition-colors duration-300">Grafiki</a>
+                    <a href="index.html#opinie" class="text-[14px] uppercase tracking-wider font-semibold text-zinc-400 hover:text-white transition-colors duration-300">Opinie</a>
+                    <a href="index.html#kontakt" class="bg-white text-black px-7 py-2.5 rounded-full text-[14px] font-bold hover:bg-zinc-200 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
                         Współpraca
                     </a>
                 </div>
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-slate-900 hover:text-indigo-600 focus:outline-none p-2 rounded-xl hover:bg-slate-100 transition-colors">
+                    <button id="mobile-menu-btn" class="text-zinc-200 hover:text-white focus:outline-none p-2 rounded-xl transition-colors">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
@@ -184,59 +190,63 @@
                 </div>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-xl transform origin-top transition-transform duration-300">
+        <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-0 w-full bg-black/95 backdrop-blur-xl border-b border-zinc-900 shadow-xl transform origin-top transition-transform duration-300">
             <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col items-center">
-                <a href="https://koupaq.pl" class="mobile-link block w-full text-center px-3 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-indigo-600">O mnie</a>
-                <a href="" class="mobile-link block w-full text-center px-3 py-3 rounded-xl text-base font-medium text-indigo-600 hover:bg-slate-50">Grafiki</a>
-                <a href="https://koupaq.pl" class="mobile-link block w-full text-center px-3 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-indigo-600">Opinie</a>
-                <a href="https://koupaq.pl" class="mobile-link mt-4 w-full text-center bg-indigo-600 text-white px-6 py-3 rounded-xl font-medium shadow-md active:scale-95 transition-transform">Współpraca</a>
+                <a href="index.html#o-mnie" class="mobile-link block w-full text-center px-3 py-3 rounded-xl text-base font-medium text-zinc-400 hover:text-white hover:bg-zinc-900">O mnie</a>
+                <a href="" class="mobile-link block w-full text-center px-3 py-3 rounded-xl text-base font-medium text-white">Grafiki</a>
+                <a href="index.html#opinie" class="mobile-link block w-full text-center px-3 py-3 rounded-xl text-base font-medium text-zinc-400 hover:text-white hover:bg-zinc-900">Opinie</a>
+                <a href="index.html#kontakt" class="mobile-link mt-4 w-full text-center bg-white text-black px-6 py-3 rounded-xl font-bold shadow-md active:scale-95 transition-transform">Współpraca</a>
             </div>
         </div>
     </nav>
     <div id="pf-component-root" class="w-full flex-grow flex flex-col items-center pt-[150px] pb-12 px-4 sm:px-6 relative">
         <div class="w-full max-w-6xl">
-            <div class="flex justify-center mb-16 reveal-scale">
-                <div class="relative w-full max-w-md group">
-                    <div class="absolute inset-0 bg-indigo-600/5 rounded-full blur-md transform group-hover:scale-105 transition-transform duration-300"></div>
-                    <i class="ph ph-magnifying-glass absolute left-5 top-1/2 transform -translate-y-1/2 text-indigo-400 text-xl z-10"></i>
+            <div class="text-center mb-12 reveal-up">
+                <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">Wszystkie Prace</h1>
+                <p class="text-zinc-400 font-light">Przeglądaj moje portfolio za pomocą wyszukiwarki poniżej.</p>
+            </div>
+            <div class="flex justify-center mb-16 reveal-scale delay-100">
+                <div class="relative w-full max-w-xl group">
+                    <div class="absolute inset-0 bg-white/5 rounded-full blur-md transform group-hover:scale-105 transition-transform duration-500"></div>
+                    <svg class="w-5 h-5 absolute left-6 top-1/2 transform -translate-y-1/2 text-zinc-400 z-10 transition-colors group-focus-within:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                     <input 
                         type="text" 
                         id="pf-searchInput" 
                         placeholder="Szukaj (np. Miniaturka, Embed)..." 
-                        class="pf-search-input relative z-10 w-full bg-white/80 backdrop-blur-sm border border-slate-200 text-slate-800 text-[15px] font-medium rounded-full py-4 pl-14 pr-6 transition-all shadow-sm placeholder-slate-400 hover:border-indigo-300 focus:bg-white focus:border-indigo-500"
+                        class="pf-search-input relative z-10 w-full bg-zinc-900/50 backdrop-blur-md border border-zinc-800 text-white text-[16px] font-medium rounded-full py-5 pl-14 pr-6 transition-all shadow-sm placeholder-zinc-500 hover:border-zinc-500 focus:bg-zinc-900 focus:border-white"
                         autocomplete="off"
                     >
                 </div>
             </div>
-            <div id="pf-projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+            <div id="pf-projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
             </div>
             <div id="pf-emptyState" class="hidden flex-col items-center justify-center py-20 opacity-0 transition-opacity duration-300">
-                <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mb-4">
-                    <i class="ph ph-magnifying-glass text-2xl"></i>
+                <div class="w-20 h-20 bg-zinc-900 text-zinc-500 rounded-full flex items-center justify-center mb-6 border border-zinc-800">
+                    <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 </div>
-                <span class="text-slate-500 font-medium">Brak wyników wyszukiwania</span>
+                <span class="text-zinc-400 font-medium text-lg">Brak wyników wyszukiwania</span>
             </div>
         </div>
         <div id="pf-projectModal" class="fixed inset-0 z-[99999] hidden" role="dialog" aria-modal="true">
-            <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity opacity-0 duration-300" id="pf-modalBackdrop"></div>
+            <div class="fixed inset-0 bg-black/90 backdrop-blur-md transition-opacity opacity-0 duration-500" id="pf-modalBackdrop"></div>
             <div class="fixed inset-0 z-[100000] overflow-y-auto pf-no-scrollbar">
                 <div class="flex min-h-full items-center justify-center p-4">
-                    <div class="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all text-left" id="pf-modalPanel">
-                        <button onclick="pf_closeModal()" class="absolute top-4 right-4 z-20 w-10 h-10 flex items-center justify-center bg-white/90 hover:bg-white backdrop-blur text-slate-800 rounded-full transition-all shadow-sm cursor-pointer border-0 group hover:shadow-md">
-                            <i class="ph ph-x text-lg font-bold group-hover:rotate-90 transition-transform duration-300"></i>
+                    <div class="relative w-full max-w-4xl bg-[#0a0a0a] border border-zinc-800 rounded-3xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all text-left" id="pf-modalPanel">
+                        <button onclick="pf_closeModal()" class="absolute top-6 right-6 z-20 w-12 h-12 flex items-center justify-center bg-black/50 hover:bg-white backdrop-blur text-zinc-400 hover:text-black rounded-full transition-all shadow-sm cursor-pointer border-0 group hover:shadow-md">
+                            <svg class="w-6 h-6 transform group-hover:rotate-90 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
-                        <div class="w-full aspect-[16/9] bg-slate-100 relative">
+                        <div class="w-full aspect-[16/9] bg-zinc-900 relative">
                             <img id="pf-modalImage" src="" alt="Podgląd" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent"></div>
                         </div>
-                        <div class="p-8 sm:p-10">
-                            <h2 class="text-3xl font-extrabold text-slate-900 mb-3 mt-0 leading-tight" id="pf-modalTitle">
+                        <div class="p-8 sm:p-12">
+                            <h2 class="text-4xl font-black text-white mb-4 mt-0 tracking-tight" id="pf-modalTitle">
                                 Tytuł Projektu
                             </h2>
-                            <p class="text-slate-600 text-[17px] leading-relaxed mb-8 mt-0" id="pf-modalDescription">
+                            <p class="text-zinc-400 text-lg leading-relaxed mb-8 mt-0 font-light" id="pf-modalDescription">
                                 Opis...
                             </p>
-                            <div class="flex flex-wrap gap-2" id="pf-modalTags">
+                            <div class="flex flex-wrap gap-3" id="pf-modalTags">
                             </div>
                         </div>
                     </div>
@@ -244,41 +254,36 @@
             </div>
         </div>
     </div>
-    <footer class="bg-white border-t border-slate-200 pt-16 pb-8 relative overflow-hidden mt-auto">
+    <footer class="bg-black border-t border-zinc-900 pt-16 pb-8 relative overflow-hidden mt-auto">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
                 <div class="flex-shrink-0 reveal-left">
-                    <a href="index.html" class="text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2 group">
-                        <span>Koupaq<span class="text-indigo-600">.</span></span>
+                    <a href="index.html" class="text-3xl font-black text-white tracking-tighter flex items-center gap-1 group">
+                        <span>Koupaq</span><span class="text-zinc-500 group-hover:text-white transition-colors">.</span>
                     </a>
                 </div>
                 <nav class="flex items-center gap-6 md:gap-10 reveal-up delay-100">
-                    <a href="https://koupaq.pl" class="text-[15px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors">O mnie</a>
-                    <a href="" class="text-[15px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Grafiki</a>
-                    <a href="https://koupaq.pl" class="text-[15px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Opinie</a>
+                    <a href="index.html#o-mnie" class="text-[14px] uppercase tracking-widest font-bold text-zinc-500 hover:text-white transition-colors">O mnie</a>
+                    <a href="" class="text-[14px] uppercase tracking-widest font-bold text-white transition-colors">Grafiki</a>
+                    <a href="index.html#opinie" class="text-[14px] uppercase tracking-widest font-bold text-zinc-500 hover:text-white transition-colors">Opinie</a>
                 </nav>
                 <div class="reveal-right">
-                    <a href="index.html#kontakt" class="inline-flex items-center gap-2 bg-indigo-600 text-white px-7 py-3 rounded-full text-[14px] font-bold tracking-wide hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 transform hover:-translate-y-0.5 group">
+                    <a href="index.html#kontakt" class="inline-flex items-center gap-2 bg-white text-black px-8 py-3 rounded-full text-[13px] uppercase tracking-widest font-bold hover:bg-zinc-300 hover:scale-105 transition-all duration-300 group">
                         Kontakt
-                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
                 </div>
             </div>
-            <div class="h-px w-full bg-slate-200 mb-8 reveal-scale"></div>
+            <div class="h-px w-full bg-zinc-900 mb-8 reveal-scale"></div>
             <div class="flex flex-col-reverse md:flex-row justify-between items-center gap-6">
-                <p class="text-sm text-slate-500 font-medium reveal-left">&copy; 2024 Koupaq. Wszelkie prawa zastrzeżone.</p>
-                <div class="flex items-center gap-5 reveal-right">
-                    <a href="https://discord.com/users/1186281697872986152" target="_blank" class="text-slate-400 hover:text-indigo-600 transform hover:scale-110 transition-all duration-300">
+                <p class="text-sm text-zinc-600 font-medium reveal-left">&copy; 2024 Koupaq. Wszelkie prawa zastrzeżone.</p>
+                <div class="flex items-center gap-6 reveal-right">
+                    <a href="https://discord.com/users/1186281697872986152" target="_blank" class="text-zinc-600 hover:text-white transform hover:scale-110 transition-all duration-300">
                         <span class="sr-only">Discord</span>
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.418 2.157-2.418 1.21 0 2.176 1.095 2.157 2.418 0 1.334-.956 2.419-2.157 2.419zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.095 2.157 2.418 0 1.334-.946 2.419-2.157 2.419z"/></svg>
                     </a>
-                    <a href="Koupaq Design" class="text-slate-400 hover:text-indigo-600 transform hover:scale-110 transition-all duration-300">
+                    <a href="Koupaq Design" class="text-zinc-600 hover:text-white transform hover:scale-110 transition-all duration-300">
                         <span class="sr-only">Instagram</span>
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="2"></rect></svg>
-                    </a>
-                    <a href="mailto:koupaqdesign@gmail.com" class="text-slate-400 hover:text-indigo-600 transform hover:scale-110 transition-all duration-300">
-                        <span class="sr-only">Email</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                     </a>
                 </div>
             </div>
@@ -291,7 +296,7 @@
     </div>
 
     <script>
-        const pf_projectsData = [
+        const pf_projectsData = [ 
             { id: 1, title: "Embed Discord", image: "https://i.imgur.com/gPZMlNu.png", description: "Profesjonalna paczka embedów na serwer discord", tags: ["Adobe Photoshop", "Cinema 4D"] },
             { id: 2, title: "Miniaturka", image: "https://i.imgur.com/ZrL2Hcv.png", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
             { id: 3, title: "Embed Discord", image: "https://i.imgur.com/LgkZcGV.png", description: "Profesjonalna paczka embedów na serwer discord", tags: ["Cinema 4D", "Photoshop"] },
@@ -304,9 +309,18 @@
             { id: 10, title: "Miniaturka", image: "https://i.imgur.com/YwkPrQR.png", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
             { id: 11, title: "Miniaturka", image: "https://i.imgur.com/yAF2uaV.png", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
             { id: 12, title: "Miniaturka", image: "https://i.imgur.com/9NAiHor.png", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
-            { id: 13, title: "Miniaturka", image: "https://i.imgur.com/v3yCo8G.png", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] }
+            { id: 13, title: "Miniaturka", image: "https://i.imgur.com/v3yCo8G.png", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 14, title: "Grafiki na item shop", image: "https://i.imgur.com/bMWyJQK.jpeg", description: "Profesjonalne grafiki na item shop minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 15, title: "Logo serwera mc", image: "https://i.imgur.com/JG5jBhm.png", description: "Profesjonalne logo serwera minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 16, title: "Logo serwera mc", image: "https://i.imgur.com/SIx9ifY.png", description: "Profesjonalne logo serwera minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 17, title: "Miniaturka dla paczka krety", image: "https://i.imgur.com/GBBcDzZ.jpeg", description: "Profesjonalna mianiaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 18, title: "Miniaturka dla paczka krety", image: "https://i.imgur.com/YxH1HC6.jpeg", description: "Profesjonalna miniaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 19, title: "Embed Discord", image: "https://i.imgur.com/96vCMoS.jpeg", description: "Profesjonalny embed discord", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 20, title: "Embed Discord", image: "https://i.imgur.com/XExC1Ns.jpeg", description: "Profesjonalny embed discord", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 21, title: "Mianiaturka battle strages", image: "https://i.imgur.com/Ziv6atM.png", description: "Profesjonalna mianiaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 22, title: "Miniaturka Familiada", image: "https://i.imgur.com/5cIWC1Z.png", description: "Profesjonalna mianiaturka minecraft", tags: ["Cinema 4D", "Photoshop"] },
+            { id: 23, title: "Miniaturka", image: "https://i.imgur.com/Kxro1QH.png", description: "Profesjonalna mianiaturka minecraft", tags: ["Cinema 4D", "Photoshop"] }
         ];
-
         const pf_grid = document.getElementById('pf-projectsGrid');
         const pf_searchInput = document.getElementById('pf-searchInput');
         const pf_emptyState = document.getElementById('pf-emptyState');
@@ -319,32 +333,36 @@
         const pf_modalTags = document.getElementById('pf-modalTags');
         function pf_createCard(project, index) {
             const delay = (index % 6) * 100; 
-            return `
-                <div 
-                    class="group cursor-pointer pf-animate-enter block"
-                    style="animation-delay: ${delay}ms; text-decoration: none;"
-                    onclick="pf_openModal(${project.id})"
-                >
-                    <div class="w-full aspect-[4/3] rounded-3xl overflow-hidden mb-4 bg-slate-100 transition-all duration-500 shadow-sm border border-slate-100 group-hover:shadow-2xl group-hover:shadow-indigo-500/20 group-hover:-translate-y-2 relative">
-                        <img 
-                            src="${project.image}" 
-                            alt="${project.title}" 
-                            class="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110 block"
-                            loading="lazy"
-                        >
-                    </div>
-                    <div class="flex items-center justify-between px-2">
-                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors m-0 leading-normal">
+        return `
+            <div 
+                class="group cursor-pointer pf-animate-enter block"
+                style="animation-delay: ${delay}ms; text-decoration: none;"
+                onclick="pf_openModal(${project.id})"
+            >
+                <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-zinc-900 transition-all duration-500 border border-zinc-800 group-hover:border-zinc-500 group-hover:shadow-[0_20px_40px_rgba(255,255,255,0.05)] group-hover:-translate-y-2 relative">
+                    <img 
+                        src="${project.image}" 
+                        alt="${project.title}" 
+                        class="pf-card-img w-full h-full object-cover block"
+                        loading="lazy"
+                    >
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
+                </div>
+                <div class="flex items-center justify-between px-2">
+                    <div>
+                        <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1">Portfolio</p>
+                        <h3 class="text-xl font-bold text-white group-hover:text-zinc-300 transition-colors m-0 leading-normal">
                             ${project.title}
                         </h3>
-                        <div class="w-10 h-10 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 transition-all duration-300 group-hover:bg-indigo-600 group-hover:border-indigo-600 group-hover:text-white">
-                            <i class="ph ph-arrow-right text-base font-bold transform group-hover:-rotate-45 transition-transform duration-300"></i>
-                        </div>
+                    </div>
+                    <div class="w-12 h-12 rounded-full border border-zinc-700 flex items-center justify-center text-white transition-all duration-500 group-hover:bg-white group-hover:text-black group-hover:-rotate-45">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </div>
                 </div>
-            `;
-        }
-        function pf_renderProjects(data) {
+            </div>
+        `;
+    }
+    function pf_renderProjects(data) {
             if(!pf_grid) return;
             pf_grid.innerHTML = '';
             
@@ -378,7 +396,7 @@
             pf_modalDesc.textContent = project.description;
             pf_modalImage.src = project.image;
             pf_modalTags.innerHTML = project.tags.map(tag => `
-                <span class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 bg-slate-100 border border-slate-200 cursor-default">
+                <span class="px-4 py-2 rounded-full text-xs font-bold text-zinc-300 bg-zinc-900 border border-zinc-800 uppercase tracking-widest cursor-default">
                     ${tag}
                 </span>
             `).join('');
@@ -401,7 +419,7 @@
             setTimeout(() => {
                 pf_modal.classList.add('hidden');
                 document.body.style.overflow = '';
-            }, 300);
+            }, 500);
         }
 
         if(pf_modal) {
@@ -412,12 +430,7 @@
         document.addEventListener('keydown', (e) => { if(e.key === 'Escape') pf_closeModal(); });
         document.addEventListener('DOMContentLoaded', () => {
             pf_renderProjects(pf_projectsData);
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
-            
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -426,24 +439,58 @@
                     }
                 });
             }, observerOptions);
-            
             document.querySelectorAll('.reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-scale').forEach((element) => {
                 observer.observe(element);
             });
             const btn = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
             if(btn && menu) {
-                btn.addEventListener('click', () => {
-                    menu.classList.toggle('hidden');
-                });
+                btn.addEventListener('click', () => menu.classList.toggle('hidden'));
             }
         });
         window.addEventListener('scroll', () => {
             const goTop = document.getElementById('goTop');
             if(goTop) {
-                goTop.classList.toggle('show', window.scrollY > 300);
+                if(window.scrollY > 400) {
+                    goTop.classList.add('show');
+                } else {
+                    goTop.classList.remove('show');
+                }
             }
         });
+
+        function copyToClipboard(text, btnElement) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 3000);
+
+                const originalText = btnElement.innerText;
+                btnElement.innerText = "Skopiowano!";
+                btnElement.classList.add('bg-white', 'text-black');
+                btnElement.classList.remove('bg-transparent', 'text-white', 'border-zinc-700');
+                
+                setTimeout(() => {
+                    btnElement.innerText = originalText;
+                    btnElement.classList.remove('bg-white', 'text-black');
+                    btnElement.classList.add('bg-transparent', 'text-white', 'border-zinc-700');
+                }, 2000);
+            } catch (err) {
+                console.error('Kopiowanie nie powiodło się', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
     </script>
 </body>
 </html>
